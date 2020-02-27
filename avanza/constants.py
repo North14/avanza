@@ -6,7 +6,7 @@ constants = {
 
 # Paths
 constants['paths']['POSITIONS_PATH'] =             '/_mobile/account/positions'
-constants['paths']['OVERVIEW_PATH'] =              '/_mobile/ccount/overview'
+constants['paths']['OVERVIEW_PATH'] =              '/_mobile/account/overview'
 constants['paths']['ACCOUNT_OVERVIEW_PATH'] =      '/_mobile/account/{}/overview'
 constants['paths']['DEALS_AND_ORDERS_PATH'] =      '/_mobile/account/dealsandorders'
 constants['paths']['WATCHLISTS_PATH'] =            '/_mobile/usercontent/watchlist'
@@ -24,8 +24,12 @@ constants['paths']['ORDER_GET_PATH'] =             '/_mobile/order/{}'
 constants['paths']['SEARCH_PATH'] =                '/_mobile/market/search/{}'
 constants['paths']['AUTHENTICATION_PATH'] =        '/_api/authentication/sessions/usercredentials'
 constants['paths']['TOTP_PATH'] =                  '/_api/authentication/sessions/totp'
+constants['paths']['BANKID_PATH'] =                '/_api/authentication/sessions/bankid'
 constants['paths']['INSPIRATION_LIST_PATH'] =      '/_mobile/marketing/inspirationlist/{}'
 constants['paths']['TRANSACTIONS_PATH'] =          '/_mobile/account/transactions/{}'
+constants['paths']['CATEGORIZED_ACCOUNTS'] =       '/_cqbe/ff/overview/categorizedAccounts'
+constants['paths']['CHARTDATA_OVERVIEW'] =         '/_cqbe/ff/overview/chart/{}'
+constants['paths']['SEARCH'] =                     '/_cqbe/search/global-search/global-search-template?query={}'
 
 
 # Search
