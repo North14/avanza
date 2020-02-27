@@ -131,3 +131,4 @@ dmypy.json
 # Package specific
 Pipfile.lock
 run.py
+tmp/

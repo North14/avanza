@@ -1,5 +1,8 @@
 import requests
 import logging
+import pickle
+from os import path
+from selenium import webdriver
 
 from dataclasses import dataclass
 
@@ -8,78 +11,57 @@ from .constants import constants
 BASE_URL = 'http://www.avanza.se'
 
 class Avanza:
-    def __init__(self, login_data, login_method):
-        self.login_data = login_data
-        self.login_method = login_method
-        # self.username = username
-        # self.password = password
-        # self.totp_secret = totp_secret
+    def __init__(self):
         self.session = requests.Session()
 
     def _request_noauth(self, url):
-        return self.session.get(url, cookies={'from-my': 'browser'}).json()
-
-    def _request_totp(self, url):
-        # TODO: authenticate before returning json
-        response = self.session.post(
-                f"constants['paths']['AUTHENTICATION_PATH']",
-                json=self.login_data
-                )
-        if self.login_data['totp_secret']:
-            pass
+        print("qwe")
         return self.session.get(url).json()
 
-    def _request_bankid(self, url):
-        response = self.session.post(
-                f"{BASE_URL}{constants['paths']['BANKID_PATH']}",
-                json=self.login_data,
-                )
-        logging.info(response)
+    def _test_auth(self):
+        url = f"{BASE_URL}{constants['paths']['POSITIONS_PATH']}"
+        response = self.session.get(url)
+        if response.ok:
+            return True
+        return False
+
+    def _authenticate(self):
+        if not self._test_auth():
+            if path.isfile('.cookies'):
+                with open('.cookies', 'r+b')  as f:
+                    self.session.cookies.update(pickle.load(f))
+            if not self._test_auth():
+                driver = webdriver.Firefox()
+                driver.get("https://www.avanza.se/start(right-overlay:login/login-overlay)")
+                while True:
+                    if driver.current_url == "https://www.avanza.se/hem/senaste.html":
+                        [self.session.cookies.set(c['name'], c['value']) for c in driver.get_cookies()]
+                        driver.close()
+                        break
+                with open('.cookies', 'w+b') as f:
+                    pickle.dump(self.session.cookies, f)
+
+    def _request_withauth(self, url):
+        self._authenticate()
         return self.session.get(url).json()
 
-
-    def check_login_data(self):
-        if self.login_method:
-            if (self.login_method == 'totp') and \
-                    self.login_data['username'] and \
-                    self.login_data['password'] and \
-                    self.login_data['totp_secret']:
-                return True
-            elif (self.login_method == 'bankid') and \
-                    self.login_data['identificationNumber']:
-                return True
+    def _request(self, url, auth=False):
+        if auth:
+            return self._request_withauth(url)
         else:
-            return False
-
-    def _request(self, url, auth):
-        if auth == 'required':
-            if self.check_login_data():
-                self._request_totp(url)
-            else:
-                raise Exception("Login data neccessary")
-        elif auth == 'optional':
-            if self.check_login_data():
-                if self.login_method == 'totp':
-                    return self._request_totp(url)
-                if self.login_method == 'bankid':
-                    return self._request_bankid(url)
-            else:
-                logging.info("Additional data can be found if login data is set")
-                return self._request_noauth(url)
-        elif auth == 'unneccessary':
             return self._request_noauth(url)
 
     def stock_path(self, orderbookId):
-        return self._request(f"{BASE_URL}{constants['paths']['STOCK_PATH']}".format(orderbookId), 'optional')
+        return self._request(f"{BASE_URL}{constants['paths']['STOCK_PATH']}".format(orderbookId), auth=True)
 
     def fund_path(self, orderbookId):
-        return self._request(f"{BASE_URL}{constants['paths']['FUND_PATH']}".format(orderbookId), 'optional')
+        return self._request(f"{BASE_URL}{constants['paths']['FUND_PATH']}".format(orderbookId), auth=True)
 
     def certificate_path(self, orderbookId):
-        return self._request(f"{BASE_URL}{constants['paths']['CERTIFICATE_PATH']}".format(orderbookId), 'optional')
+        return self._request(f"{BASE_URL}{constants['paths']['CERTIFICATE_PATH']}".format(orderbookId), auth=True)
 
     def watchlists_path(self):
-        return self._request(f"{BASE_URL}{constants['paths']['WATCHLISTS_PATH']}",  'required')
+        return self._request(f"{BASE_URL}{constants['paths']['WATCHLISTS_PATH']}",  auth=True)
 
     def search(self, searchQuery):
-        return self._request(f"{BASE_URL}{constants['paths']['SEARCH']}".format(searchQuery), 'unneccessary')
+        return self._request(f"{BASE_URL}{constants['paths']['SEARCH']}".format(searchQuery))
