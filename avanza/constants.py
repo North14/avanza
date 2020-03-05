@@ -22,14 +22,18 @@ constants['paths']['ORDER_PLACE_DELETE_PATH'] =    '/_api/order'
 constants['paths']['ORDER_EDIT_PATH'] =            '/_api/order/{}/{}'
 constants['paths']['ORDER_GET_PATH'] =             '/_mobile/order/{}'
 constants['paths']['SEARCH_PATH'] =                '/_mobile/market/search/{}'
-constants['paths']['AUTHENTICATION_PATH'] =        '/_api/authentication/sessions/usercredentials'
-constants['paths']['TOTP_PATH'] =                  '/_api/authentication/sessions/totp'
-constants['paths']['BANKID_PATH'] =                '/_api/authentication/sessions/bankid'
 constants['paths']['INSPIRATION_LIST_PATH'] =      '/_mobile/marketing/inspirationlist/{}'
 constants['paths']['TRANSACTIONS_PATH'] =          '/_mobile/account/transactions/{}'
 constants['paths']['CATEGORIZED_ACCOUNTS'] =       '/_cqbe/ff/overview/categorizedAccounts'
 constants['paths']['CHARTDATA_OVERVIEW'] =         '/_cqbe/ff/overview/chart/{}'
+constants['paths']['CHARTDATA_DISTRIBUTION'] =     '/ab/component/accountsdistribution/chart/'
 constants['paths']['SEARCH'] =                     '/_cqbe/search/global-search/global-search-template?query={}'
+constants['paths']['NEWS'] =                       '/_cqbe/placera/feed-news-bill/{}'
+constants['paths']['LOGIN'] =                      '/start(right-overlay:login/login-overlay)'
+constants['paths']['HOME'] =                       '/hem/senaste.html'
+constants['paths']['FEED'] =                       '/_cqbe/campaign/feed'
+constants['paths']['ACCOUNTS'] =                   '/_cqbe/insights/customer/accounts'
+constants['paths']['INSIGHT'] =                    '/_cqbe/insights/?timePeriod={}'
 
 
 # Search
@@ -49,13 +53,15 @@ constants['public']['CONVERTIBLE'] =         'convertible'
 
 
 # Chartdata
-constants['public']['TODAY'] =         'TODAY'
-constants['public']['ONE_MONTH'] =     'ONE_MONTH'
-constants['public']['THREE_MONTHS'] =  'THREE_MONTHS'
-constants['public']['ONE_WEEK'] =      'ONE_WEEK'
-constants['public']['THIS_YEAR'] =     'THIS_YEAR'
-constants['public']['ONE_YEAR'] =      'ONE_YEAR'
-constants['public']['FIVE_YEARS'] =    'FIVE_YEARS'
+constants['public']['chartdata'] =                  {}
+constants['public']['chartdata']['TODAY'] =         'TODAY'
+constants['public']['chartdata']['ONE_MONTH'] =     'ONE_MONTH'
+constants['public']['chartdata']['THREE_MONTHS'] =  'THREE_MONTHS'
+constants['public']['chartdata']['ONE_WEEK'] =      'ONE_WEEK'
+constants['public']['chartdata']['THIS_YEAR'] =     'THIS_YEAR'
+constants['public']['chartdata']['ONE_YEAR'] =      'ONE_YEAR'
+constants['public']['chartdata']['THREE_YEARS'] =   'THREE_YEARS'
+constants['public']['chartdata']['FIVE_YEARS'] =    'FIVE_YEARS'
 
 
 # Marketing

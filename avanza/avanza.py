@@ -8,17 +8,18 @@ from dataclasses import dataclass
 
 from .constants import constants
 
-BASE_URL = 'http://www.avanza.se'
+BASE_URL = 'https://www.avanza.se'
 
 class Avanza:
     def __init__(self):
         self.session = requests.Session()
 
     def _request_noauth(self, url):
-        print("qwe")
+        """ Returns json of requested url """
         return self.session.get(url).json()
 
     def _test_auth(self):
+        """ Tests authentication by checking response of positions page """
         url = f"{BASE_URL}{constants['paths']['POSITIONS_PATH']}"
         response = self.session.get(url)
         if response.ok:
@@ -26,15 +27,16 @@ class Avanza:
         return False
 
     def _authenticate(self):
+        """ Test authentication using cookies """
         if not self._test_auth():
-            if path.isfile('.cookies'):
+            if path.isfile('.cookies'): # if not authenticated, load cookies
                 with open('.cookies', 'r+b')  as f:
                     self.session.cookies.update(pickle.load(f))
-            if not self._test_auth():
+            if not self._test_auth(): # if still not authenticated try logging in and saving new cookies
                 driver = webdriver.Firefox()
-                driver.get("https://www.avanza.se/start(right-overlay:login/login-overlay)")
+                driver.get(f"{BASE_URL}{constants['paths']['LOGIN']}")
                 while True:
-                    if driver.current_url == "https://www.avanza.se/hem/senaste.html":
+                    if driver.current_url == f"{BASE_URL}{constants['paths']['HOME']}":
                         [self.session.cookies.set(c['name'], c['value']) for c in driver.get_cookies()]
                         driver.close()
                         break
@@ -42,26 +44,83 @@ class Avanza:
                     pickle.dump(self.session.cookies, f)
 
     def _request_withauth(self, url):
+        """ Authenticates before returning json of requested url """
         self._authenticate()
         return self.session.get(url).json()
 
     def _request(self, url, auth=False):
+        """ Choose with or without account depending on function """
         if auth:
             return self._request_withauth(url)
         else:
             return self._request_noauth(url)
 
-    def stock_path(self, orderbookId):
+    def stock(self, orderbookId):
+        """
+        Returns information about stock,
+        may be used for funds/certificates too,
+        but might return different results
+        """
         return self._request(f"{BASE_URL}{constants['paths']['STOCK_PATH']}".format(orderbookId), auth=True)
 
-    def fund_path(self, orderbookId):
+    def fund(self, orderbookId):
+        """
+        Returns information about fund,
+        may be used for funds/certificates too,
+        but might return different results
+        """
         return self._request(f"{BASE_URL}{constants['paths']['FUND_PATH']}".format(orderbookId), auth=True)
 
-    def certificate_path(self, orderbookId):
+    def certificate(self, orderbookId):
+        """
+        Returns information about certificate,
+        may be used for funds/certificates too,
+        but might return different results
+        """
         return self._request(f"{BASE_URL}{constants['paths']['CERTIFICATE_PATH']}".format(orderbookId), auth=True)
 
-    def watchlists_path(self):
+    def watchlists(self):
+        """ Returns information about accounts watchlists """
         return self._request(f"{BASE_URL}{constants['paths']['WATCHLISTS_PATH']}",  auth=True)
 
+    def positions(self):
+        """ Returns information about accounts positions """
+        return self._request(f"{BASE_URL}{constants['paths']['POSITIONS_PATH']}",  auth=True)
+
+    def deals_and_orders(self):
+        """ Returns deals, orders and accounts """
+        return self._request(f"{BASE_URL}{constants['paths']['DEALS_AND_ORDERS_PATH']}",  auth=True)
+
     def search(self, searchQuery):
+        """ Returns results of search query """
         return self._request(f"{BASE_URL}{constants['paths']['SEARCH']}".format(searchQuery))
+
+    def overview_chartdata(self, timePeriod):
+        """ Returns chartdata from overview page """
+        timePeriod = timePeriod.upper()
+        for periods in constants['public']['chartdata']:
+            if timePeriod == periods:
+                break
+        else:
+            raise Exception("Invalid timeperiod!")
+        return self._request(f"{BASE_URL}{constants['paths']['CHARTDATA_OVERVIEW']}".format(timePeriod),  auth=True)
+
+    def news(self, index):
+        """ Returns x amount of news """
+        try:
+            int(index)
+            return self._request(f"{BASE_URL}{constants['paths']['NEWS']}".format(index))
+        except:
+            raise TypeError("Not an int")
+
+    def distribution_chartdata(self):
+        """ Returns values from account distribution chart """
+        return self._request(f"{BASE_URL}{constants['paths']['CHARTDATA_DISTRIBUTION']}",  auth=True)
+
+    def feed(self):
+        """ Returns feed from Home """
+        return self._request(f"{BASE_URL}{constants['paths']['FEED']}",  auth=True)
+
+    def accounts(self):
+        """ Returns accounts """
+        return self._request(f"{BASE_URL}{constants['paths']['ACCOUNTS']}",  auth=True)

@@ -132,3 +132,4 @@ dmypy.json
 Pipfile.lock
 run.py
 tmp/
+.cookies
