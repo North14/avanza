@@ -8,7 +8,7 @@ install:
 before_script:
   - flake8 --version
 script:
-  - flake8 --ignore=E502 --exclude=avanza/constants.py
+  - flake8 --ignore=E501,E502 --exclude=avanza/constants.py
 
 notifications:
   email:

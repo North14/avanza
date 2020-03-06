@@ -1,14 +1,13 @@
-import requests
 import logging
+import requests
 import pickle
 from os import path
 from selenium import webdriver
 
-from dataclasses import dataclass
-
 from .constants import constants
 
 BASE_URL = 'https://www.avanza.se'
+
 
 class Avanza:
     def __init__(self):
@@ -29,10 +28,10 @@ class Avanza:
     def _authenticate(self):
         """ Test authentication using cookies """
         if not self._test_auth():
-            if path.isfile('.cookies'): # if not authenticated, load cookies
-                with open('.cookies', 'r+b')  as f:
+            if path.isfile('.cookies'):  # if not authenticated, load cookies
+                with open('.cookies', 'r+b') as f:
                     self.session.cookies.update(pickle.load(f))
-            if not self._test_auth(): # if still not authenticated try logging in and saving new cookies
+            if not self._test_auth():  # if still not authenticated try logging in and saving new cookies
                 driver = webdriver.Firefox()
                 driver.get(f"{BASE_URL}{constants['paths']['LOGIN']}")
                 while True:
@@ -64,8 +63,8 @@ class Avanza:
         try:
             int(orderbookId)
             return self._request(f"{BASE_URL}{constants['paths']['STOCK_PATH']}".format(orderbookId))
-        except:
-            raise TypeError("orderbookId not an int!")
+        except ValueError:
+            logging.error("orderbookId must be int")
 
     def fund(self, orderbookId):
         """
@@ -76,8 +75,8 @@ class Avanza:
         try:
             int(orderbookId)
             return self._request(f"{BASE_URL}{constants['paths']['FUND_PATH']}".format(orderbookId))
-        except:
-            raise TypeError("orderbookId not an int!")
+        except ValueError:
+            logging.error("orderbookId must be int")
 
     def certificate(self, orderbookId):
         """
@@ -88,8 +87,8 @@ class Avanza:
         try:
             int(orderbookId)
             return self._request(f"{BASE_URL}{constants['paths']['CERTIFICATE_PATH']}".format(orderbookId))
-        except:
-            raise TypeError("orderbookId not an int!")
+        except ValueError:
+            logging.error("orderbookId must be int")
 
     def watchlists(self):
         """ Returns information about accounts watchlists """
@@ -122,8 +121,8 @@ class Avanza:
         try:
             int(index)
             return self._request(f"{BASE_URL}{constants['paths']['NEWS']}".format(index))
-        except:
-            raise TypeError("Not an int")
+        except ValueError:
+            logging.error("orderbookId must be int")
 
     def distribution_chartdata(self):
         """ Returns values from account distribution chart """

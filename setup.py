@@ -5,8 +5,8 @@ with open("README.md", "r") as fh:
 
 setup(
     name="Avanza",
-    version="0.0.4",
-    packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
+    version="0.0.5",
+    packages=find_packages(),
     install_requires=[
         "requests",
         "selenium",
@@ -20,6 +20,6 @@ setup(
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License"
-    ],
+        ],
     python_requires=">=3.7"
 )
