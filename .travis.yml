@@ -6,4 +6,4 @@ python:
 before_install:
   - pip install flake8
 script:
-  - flake8 --ignore=E502 --exclude="avanza/constants.py"
+  - "flake8 --ignore=E502 --exclude=avanza/constants.py"
