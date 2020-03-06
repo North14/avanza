@@ -92,15 +92,15 @@ class Avanza:
 
     def watchlists(self):
         """ Returns information about accounts watchlists """
-        return self._request(f"{BASE_URL}{constants['paths']['WATCHLISTS_PATH']}",  auth=True)
+        return self._request(f"{BASE_URL}{constants['paths']['WATCHLISTS_PATH']}", auth=True)
 
     def positions(self):
         """ Returns information about accounts positions """
-        return self._request(f"{BASE_URL}{constants['paths']['POSITIONS_PATH']}",  auth=True)
+        return self._request(f"{BASE_URL}{constants['paths']['POSITIONS_PATH']}", auth=True)
 
     def deals_and_orders(self):
         """ Returns deals, orders and accounts """
-        return self._request(f"{BASE_URL}{constants['paths']['DEALS_AND_ORDERS_PATH']}",  auth=True)
+        return self._request(f"{BASE_URL}{constants['paths']['DEALS_AND_ORDERS_PATH']}", auth=True)
 
     def search(self, searchQuery):
         """ Returns results of search query """
@@ -114,7 +114,7 @@ class Avanza:
                 break
         else:
             raise Exception("Invalid timeperiod!")
-        return self._request(f"{BASE_URL}{constants['paths']['CHARTDATA_OVERVIEW']}".format(timePeriod),  auth=True)
+        return self._request(f"{BASE_URL}{constants['paths']['CHARTDATA_OVERVIEW']}".format(timePeriod), auth=True)
 
     def news(self, index):
         """ Returns x amount of news """
@@ -126,12 +126,12 @@ class Avanza:
 
     def distribution_chartdata(self):
         """ Returns values from account distribution chart """
-        return self._request(f"{BASE_URL}{constants['paths']['CHARTDATA_DISTRIBUTION']}",  auth=True)
+        return self._request(f"{BASE_URL}{constants['paths']['CHARTDATA_DISTRIBUTION']}", auth=True)
 
     def feed(self):
         """ Returns feed from Home """
-        return self._request(f"{BASE_URL}{constants['paths']['FEED']}",  auth=True)
+        return self._request(f"{BASE_URL}{constants['paths']['FEED']}", auth=True)
 
     def accounts(self):
         """ Returns accounts """
-        return self._request(f"{BASE_URL}{constants['paths']['ACCOUNTS']}",  auth=True)
+        return self._request(f"{BASE_URL}{constants['paths']['ACCOUNTS']}", auth=True)
