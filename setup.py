@@ -7,7 +7,10 @@ setup(
     name="Avanza",
     version="0.0.4",
     packages=find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
-    install_requires=["requests"],
+    install_requires=[
+        "requests",
+        "selenium",
+        ],
     package_data={},
     author="North14",
     description="Python wrapper for Unofficial Avanza API",
