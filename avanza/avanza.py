@@ -61,7 +61,11 @@ class Avanza:
         may be used for funds/certificates too,
         but might return different results
         """
-        return self._request(f"{BASE_URL}{constants['paths']['STOCK_PATH']}".format(orderbookId), auth=True)
+        try:
+            int(orderbookId)
+            return self._request(f"{BASE_URL}{constants['paths']['STOCK_PATH']}".format(orderbookId))
+        except:
+            raise TypeError("orderbookId not an int!")
 
     def fund(self, orderbookId):
         """
@@ -69,7 +73,11 @@ class Avanza:
         may be used for funds/certificates too,
         but might return different results
         """
-        return self._request(f"{BASE_URL}{constants['paths']['FUND_PATH']}".format(orderbookId), auth=True)
+        try:
+            int(orderbookId)
+            return self._request(f"{BASE_URL}{constants['paths']['FUND_PATH']}".format(orderbookId))
+        except:
+            raise TypeError("orderbookId not an int!")
 
     def certificate(self, orderbookId):
         """
@@ -77,7 +85,11 @@ class Avanza:
         may be used for funds/certificates too,
         but might return different results
         """
-        return self._request(f"{BASE_URL}{constants['paths']['CERTIFICATE_PATH']}".format(orderbookId), auth=True)
+        try:
+            int(orderbookId)
+            return self._request(f"{BASE_URL}{constants['paths']['CERTIFICATE_PATH']}".format(orderbookId))
+        except:
+            raise TypeError("orderbookId not an int!")
 
     def watchlists(self):
         """ Returns information about accounts watchlists """
