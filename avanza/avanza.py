@@ -1,7 +1,7 @@
 import logging
-import requests
-import pickle
 from os import path
+import pickle
+import requests
 from selenium import webdriver
 
 from .constants import constants
@@ -51,8 +51,7 @@ class Avanza:
         """ Choose with or without account depending on function """
         if auth:
             return self._request_withauth(url)
-        else:
-            return self._request_noauth(url)
+        return self._request_noauth(url)
 
     def stock(self, orderbookId):
         """
