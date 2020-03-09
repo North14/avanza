@@ -1,3 +1,5 @@
+BASE_URL = 'https://www.avanza.se'
+
 constants = {
   'paths': {},
   'public': {}
