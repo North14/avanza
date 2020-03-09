@@ -12,12 +12,11 @@ which will save cookies incurrent working directory.
 Short example of getting the current buyprice for msft stock:
 
 ```python
-from avanza import avanza
+import avanza
 
-avanza_run = avanza.Avanza()
-msft = avanza_run.stock(3873)
-buy_price = msft['buyPrice']
-print(buy_price)
+msft = avanza.Ticker(3873)
+price = msft.buyPrice
+print(price)
 > 166.48
 ```
 
