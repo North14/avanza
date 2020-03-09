@@ -15,7 +15,7 @@ Short example of getting the current buyprice for msft stock:
 import avanza
 
 msft = avanza.Ticker(3873)
-price = msft.buyPrice
+price = msft.buy_price
 print(price)
 > 166.48
 ```
