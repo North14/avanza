@@ -19,14 +19,6 @@ def search(searchQuery):
     """ Returns results of search query """
     return Base()._request(f"{BASE_URL}{constants['paths']['SEARCH']}".format(searchQuery))
 
-def overview_chartdata(timePeriod):
-    """ Returns chartdata from overview page """
-    timePeriod = timePeriod.upper()
-    if Base()._check_timePeriod(timePeriod):
-        return Base()._request(f"{BASE_URL}{constants['paths']['CHARTDATA_OVERVIEW']}".format(timePeriod), auth=True)
-    else:
-        raise Exception("Invalid timePeriod!")
-
 def news(index=5):
     """ Returns x amount of news """
     try:
@@ -34,10 +26,6 @@ def news(index=5):
         return Base()._request(f"{BASE_URL}{constants['paths']['NEWS']}".format(index))
     except ValueError:
         logging.error("orderbookId must be int")
-
-def distribution_chartdata():
-    """ Returns values from account distribution chart """
-    return Base()._request(f"{BASE_URL}{constants['paths']['CHARTDATA_DISTRIBUTION']}", auth=True)
 
 def feed():
     """ Returns feed from Home """
