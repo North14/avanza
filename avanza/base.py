@@ -12,8 +12,7 @@ class Base:
 
     def _request_noauth(self, url):
         """ Returns json of requested url """
-        response = self.session.get(url)
-        return response.json()
+        return self.session.get(url).json()
 
     def _test_auth(self):
         """ Tests authentication by checking response of positions page """
