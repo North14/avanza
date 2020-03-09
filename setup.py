@@ -5,8 +5,8 @@ with open("README.md", "r") as fh:
 
 setup(
     name="Avanza",
-    version="0.0.5",
-    packages=find_packages(),
+    version="0.0.6",
+    packages=find_packages(exclude=['contrib', 'docs', 'tests', 'examples']),
     install_requires=[
         "requests",
         "selenium",
@@ -18,8 +18,16 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/North14/avanza",
     classifiers=[
-        "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License"
+        "Operating System :: OS Independent",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Topic :: Office/Business :: Financial",
+        "Topic :: Office/Business :: Financial :: Investment",
         ],
-    python_requires=">=3.7"
+    platforms=['any'],
+    python_requires=">=3.6"
 )
