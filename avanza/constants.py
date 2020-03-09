@@ -19,7 +19,7 @@ constants['paths']['CERTIFICATE_PATH'] =           '/_mobile/market/certificate/
 constants['paths']['INSTRUMENT_PATH'] =            '/_mobile/market/{}/{}'
 constants['paths']['ORDERBOOK_PATH'] =             '/_mobile/order/{}'
 constants['paths']['ORDERBOOK_LIST_PATH'] =        '/_mobile/market/orderbooklist/{}'
-constants['paths']['CHARTDATA_PATH'] =             '/_mobile/chart/orderbook/{}'
+constants['paths']['CHARTDATA_PATH'] =             '/_mobile/chart/orderbook/{}?timePeriod={}'
 constants['paths']['ORDER_PLACE_DELETE_PATH'] =    '/_api/order'
 constants['paths']['ORDER_EDIT_PATH'] =            '/_api/order/{}/{}'
 constants['paths']['ORDER_GET_PATH'] =             '/_mobile/order/{}'
@@ -40,11 +40,11 @@ constants['paths']['INSIGHT'] =                    '/_cqbe/insights/?timePeriod=
 
 # Chartdata
 constants['public']['chartdata'] =                  {}
-constants['public']['chartdata']['TODAY'] =         'TODAY'
-constants['public']['chartdata']['ONE_MONTH'] =     'ONE_MONTH'
-constants['public']['chartdata']['THREE_MONTHS'] =  'THREE_MONTHS'
-constants['public']['chartdata']['ONE_WEEK'] =      'ONE_WEEK'
-constants['public']['chartdata']['THIS_YEAR'] =     'THIS_YEAR'
-constants['public']['chartdata']['ONE_YEAR'] =      'ONE_YEAR'
-constants['public']['chartdata']['THREE_YEARS'] =   'THREE_YEARS'
-constants['public']['chartdata']['FIVE_YEARS'] =    'FIVE_YEARS'
+constants['public']['chartdata']['TODAY'] =         'today'
+constants['public']['chartdata']['ONE_MONTH'] =     'one_month'
+constants['public']['chartdata']['THREE_MONTHS'] =  'three_months'
+constants['public']['chartdata']['ONE_WEEK'] =      'one_week'
+constants['public']['chartdata']['THIS_YEAR'] =     'this_year'
+constants['public']['chartdata']['ONE_YEAR'] =      'one_year'
+constants['public']['chartdata']['THREE_YEARS'] =   'three_years'
+constants['public']['chartdata']['FIVE_YEARS'] =    'five_years'
