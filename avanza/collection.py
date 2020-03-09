@@ -22,12 +22,10 @@ def search(searchQuery):
 def overview_chartdata(timePeriod):
     """ Returns chartdata from overview page """
     timePeriod = timePeriod.upper()
-    for periods in constants['public']['chartdata']:
-        if timePeriod == periods:
-            break
+    if Base()._check_timePeriod(timePeriod):
+        return Base()._request(f"{BASE_URL}{constants['paths']['CHARTDATA_OVERVIEW']}".format(timePeriod), auth=True)
     else:
-        raise Exception("Invalid timeperiod!")
-    return Base()._request(f"{BASE_URL}{constants['paths']['CHARTDATA_OVERVIEW']}".format(timePeriod), auth=True)
+        raise Exception("Invalid timePeriod!")
 
 def news(index=5):
     """ Returns x amount of news """

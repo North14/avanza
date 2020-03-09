@@ -50,3 +50,10 @@ class Base:
             return self._request_withauth(url)
         else:
             return self._request_noauth(url)
+
+    def _check_timePeriod(self, timePeriod):
+        for periods in constants['public']['chartdata']:
+            if timePeriod == periods:
+                return True
+        else:
+            return False
