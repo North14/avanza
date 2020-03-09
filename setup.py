@@ -18,7 +18,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/North14/avanza",
     classifiers=[
-        "License :: OSI Approved :: MIT License"
+        "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
         "Intended Audience :: Developers",
         "Programming Language :: Python :: 3",
