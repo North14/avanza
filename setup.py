@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="Avanza",
-    version="0.0.6",
+    version="0.0.7",
     packages=find_packages(exclude=['contrib', 'docs', 'tests', 'examples']),
     install_requires=[
         "requests",
