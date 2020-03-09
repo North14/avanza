@@ -7,7 +7,7 @@ Python wrapper for Unofficial Avanza API
 Code is work in progress and is only meant as "proof of concept"
 
 Authentication is done with selenium,
-which will save cookies incurrent working directory.
+which will save cookies in current working directory.
 
 Short example of getting the current buyprice for msft stock:
 
