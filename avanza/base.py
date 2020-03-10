@@ -8,11 +8,8 @@ from .constants import constants, BASE_URL
 
 class Base:
     def __init__(self):
+        """ Start python requests session """
         self.session = requests.Session()
-
-    def _request_noauth(self, url):
-        """ Returns json of requested url """
-        return self.session.get(url).json()
 
     def _test_auth(self):
         """ Tests authentication by checking response of positions page """
@@ -23,12 +20,12 @@ class Base:
         return False
 
     def _authenticate(self):
-        """ Test authentication using cookies """
+        """ Tests authentication using cookies """
         if not self._test_auth():
-            if path.isfile('.cookies'):  # if not authenticated, load cookies
+            if path.isfile('.cookies'):
                 with open('.cookies', 'r+b') as f:
                     self.session.cookies.update(pickle.load(f))
-            if not self._test_auth():  # if still not authenticated try logging in and saving new cookies
+            if not self._test_auth():
                 driver = webdriver.Firefox()
                 driver.get(f"{BASE_URL}{constants['paths']['LOGIN']}")
                 while True:
@@ -39,19 +36,28 @@ class Base:
                 with open('.cookies', 'w+b') as f:
                     pickle.dump(self.session.cookies, f)
 
-    def _request_withauth(self, url):
-        """ Authenticates before returning json of requested url """
-        self._authenticate()
+    def _request(self, url, auth=False):
+        """
+        download json of url with python request session
+
+        :type url: string
+        :param url: link to be requested
+        :type auth: boolean
+        :param auth: auth=True if request need authentication
+        :return: json of url
+        """
+        if auth:
+            self._authenticate()
         return self.session.get(url).json()
 
-    def _request(self, url, auth=False):
-        """ Choose with or without account depending on function """
-        if auth:
-            return self._request_withauth(url)
-        else:
-            return self._request_noauth(url)
-
     def _check_timePeriod(self, timePeriod):
+        """
+        Checks if arg timePeriod is a valid time period
+
+        :type timePeriod: string
+        :param timePeriod: time period
+        :rtype: boolean
+        """
         for period in constants['public']['chartdata']:
             if timePeriod == constants['public']['chartdata'][period]:
                 return True
