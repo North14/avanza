@@ -1,6 +1,14 @@
 Avanza
 ======
 
+=========== ====
+**docs**    |docs|
+**tests**   |lint|
+**package** |pypi_version|
+            |pypi_license|
+            |pypi_pversion|
+=========== ====
+
 Based on https://github.com/fhqvst/avanza
 
 Python wrapper for Unofficial Avanza API
@@ -23,3 +31,23 @@ Short example of getting the current buyprice for msft stock:
 
 More examples can be found
 `here <https://github.com/North14/avanza-client>`__
+
+.. |docs| image:: https://img.shields.io/readthedocs/avanza?style=flat-square
+   :target: https://avanza.readthedocs.io/
+   :alt: Read the Docs
+
+.. |lint| image:: https://img.shields.io/github/workflow/status/North14/avanza/Python\ lint?style=flat-square
+   :alt: GitHub Workflow Status
+
+.. |pypi_version| image:: https://img.shields.io/pypi/v/avanza?style=flat-square
+   :target: https://pypi.org/project/Avanza/
+   :alt: PyPI
+
+.. |pypi_license| image:: https://img.shields.io/pypi/l/avanza?style=flat-square
+   :target: https://pypi.org/project/Avanza/
+   :alt: PyPI - License
+
+.. |pypi_pversion| image:: https://img.shields.io/pypi/pyversions/avanza?style=flat-square
+   :target: https://pypi.org/project/Avanza/
+   :alt: PyPI - Python Version
+
