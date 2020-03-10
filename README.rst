@@ -32,22 +32,22 @@ Short example of getting the current buyprice for msft stock:
 More examples can be found
 `here <https://github.com/North14/avanza-client>`__
 
-.. |docs| image:: https://img.shields.io/readthedocs/avanza?style=flat-square
+.. |docs| image:: https://img.shields.io/readthedocs/avanza?style=flat-square&logo=read-the-docs
    :target: https://avanza.readthedocs.io/
    :alt: Read the Docs
 
-.. |lint| image:: https://img.shields.io/github/workflow/status/North14/avanza/Python\ lint?style=flat-square
+.. |lint| image:: https://img.shields.io/github/workflow/status/North14/avanza/Python\ lint?style=flat-square&logo=github
    :alt: GitHub Workflow Status
 
-.. |pypi_version| image:: https://img.shields.io/pypi/v/avanza?style=flat-square
+.. |pypi_version| image:: https://img.shields.io/pypi/v/avanza?style=flat-square&logo=pypi
    :target: https://pypi.org/project/Avanza/
    :alt: PyPI
 
-.. |pypi_license| image:: https://img.shields.io/pypi/l/avanza?style=flat-square
+.. |pypi_license| image:: https://img.shields.io/pypi/l/avanza?style=flat-square&logo=pypi
    :target: https://pypi.org/project/Avanza/
    :alt: PyPI - License
 
-.. |pypi_pversion| image:: https://img.shields.io/pypi/pyversions/avanza?style=flat-square
+.. |pypi_pversion| image:: https://img.shields.io/pypi/pyversions/avanza?style=flat-square&logo=pypi
    :target: https://pypi.org/project/Avanza/
    :alt: PyPI - Python Version
 
