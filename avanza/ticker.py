@@ -6,15 +6,11 @@ import json
 from .constants import constants, BASE_URL
 from .base import Base
 
-class Ticker:
-    def __init__(self, orderbookId, option=None):
-        self.option = option
-        if option == 'fund':
-            self.data = Base()._request(f"{BASE_URL}{constants['paths']['FUND_PATH']}".format(orderbookId))
-        elif option == 'certificate':
-            self.data = Base()._request(f"{BASE_URL}{constants['paths']['CERTIFICATE_PATH']}".format(orderbookId))
-        elif not option or option == 'stock':
-            self.data = Base()._request(f"{BASE_URL}{constants['paths']['STOCK_PATH']}".format(orderbookId))
+class Ticker(Base):
+    def __init__(self, orderbookId, instrument='stock'):
+        super().__init__()
+        if instrument in ['fund', 'certificate', 'stock']:
+            self.data = self._request(f"{BASE_URL}{constants['paths']['INSTRUMENT_PATH']}".format(instrument, orderbookId))
         else:
             raise TypeError("Invalid option!")
 
