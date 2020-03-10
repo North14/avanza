@@ -1,8 +1,10 @@
-.. currentmodule:: avanza
+.. currentmodule:: avanza.Ticker
 
 =======
 Ticker
 =======
 
-.. autoclass:: Ticker
+.. automodule:: avanza.Ticker
    :members:
+   :undoc-members:
+   :show-inheritance:

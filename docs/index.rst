@@ -1,8 +1,5 @@
 .. _root:
 
-Avanza
-======
-
 .. include:: ../README.rst
 
 .. toctree::

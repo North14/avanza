@@ -28,20 +28,22 @@ def get_news(index=5):
 def get_account_overview(accountId):
     """
     Returns information about accounts watchlists
-    .. note:: authentication neccessary
 
     :type accountId: int
     :param accountId: id of account
+    
+    .. note:: Authentication necessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['ACCOUNT_OVERVIEW_PATH']}".format(accountId), auth=True)
 
 def get_transactions(accountId=None):
     """
     Returns information about accounts watchlists
-    .. note:: authentication neccessary
 
     :type accountId: int
     :param accountId: id of account, not neccessary
+    
+    .. note:: Authentication necessary
     """
     url = f"{BASE_URL}{constants['paths']['TRANSACTIONS_PATH']}"
     if accountId:
@@ -51,10 +53,11 @@ def get_transactions(accountId=None):
 def get_insight(timePeriod="today"):
     """
     Returns accounts
-    .. note:: authentication neccessary
 
     :type timePeriod: string
     :param timePeriod: time period
+    
+    .. note:: Authentication necessary
     """
     timePeriod = timePeriod.upper()
     url = f"{BASE_URL}{constants['paths']['INSIGHT']}".format(timePeriod)
@@ -66,48 +69,55 @@ def get_insight(timePeriod="today"):
 def get_watchlists():
     """
     Returns information about accounts watchlists
-    .. note :: authentication neccessary
+    
+    .. note:: Authentication necessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['WATCHLISTS_PATH']}", auth=True)
 
 def get_positions():
     """
     Returns information about accounts positions
-    .. note :: authentication neccessary
+    
+    .. note:: Authentication necessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['POSITIONS_PATH']}", auth=True)
 
 def get_deals_and_orders():
     """
     Returns deals, orders and accounts
-    .. note :: authentication neccessary
+    
+    .. note:: Authentication necessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['DEALS_AND_ORDERS_PATH']}", auth=True)
 
 def get_feed():
     """
     Returns feed from Home
-    .. note :: authentication neccessary
+    
+    .. note:: Authentication necessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['FEED']}", auth=True)
 
 def get_accounts():
     """
     Returns accounts
-    .. note :: authentication neccessary
+    
+    .. note:: Authentication necessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['ACCOUNTS']}", auth=True)
 
 def get_inspiration_list():
     """
     Returns inspiration list
-    .. note :: authentication neccessary
+    
+    .. note:: Authentication necessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['INSPIRATION_LIST_PATH']}")
 
 def get_account_summary():
     """
     Returns account summary
-    .. note :: authentication neccessary
+    
+    .. note:: Authentication necessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['CATEGORIZED_ACCOUNTS']}", auth=True)

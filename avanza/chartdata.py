@@ -6,10 +6,11 @@ from .base import Base
 def get_overview_chartdata(timePeriod='one_month'):
     """
     Returns chartdata from overview page
-    .. note:: authentication neccessary
-    
+
     :type timePeriod: string
     :param timePeriod: time period 
+
+    .. note:: Authentication necessary
     """
     timePeriod = timePeriod.upper()
     url = f"{BASE_URL}{constants['paths']['CHARTDATA_OVERVIEW']}".format(timePeriod)
@@ -21,7 +22,8 @@ def get_overview_chartdata(timePeriod='one_month'):
 def get_distribution_chartdata():
     """
     Returns values from account distribution chart
-    .. note:: authentication neccessary
+
+    .. note:: Authentication necessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['CHARTDATA_DISTRIBUTION']}", auth=True)
 

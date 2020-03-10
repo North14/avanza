@@ -1,10 +1,10 @@
-.. currentmodule:: avanza
+.. currentmodule:: avanza.chartdata
 
 ======
 Charts
 ======
 
-.. autofunction:: get_distribution_chartdata
-.. autofunction:: get_overview_chartdata
-.. autofunction:: get_ticker_chartdata
-
+.. automodule:: avanza.chartdata
+   :members:
+   :undoc-members:
+   :show-inheritance:
