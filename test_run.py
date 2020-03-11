@@ -12,7 +12,7 @@ def test_buy_price():
             raise Exception("test_buy_price: ERROR")
 
 def test_ticker_chartdata():
-    chartdata = avanza.get_ticker_chartdata(3873)
+    chartdata = avanza.chartdata.get_ticker_chartdata(3873)
     if chartdata:
         print("test_ticker_chartdata: OK")
     else:

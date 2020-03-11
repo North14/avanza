@@ -1,11 +1,15 @@
 from setuptools import setup, find_packages
+import avanza
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+with open("README.rst", "r") as f:
+    LONG_DESCRIPTION = f.read()
+
+
+VERSION = avanza.__version__
 
 setup(
     name="Avanza",
-    version="0.0.7",
+    version=VERSION,
     packages=find_packages(exclude=['contrib', 'docs', 'tests', 'examples']),
     install_requires=[
         "requests",
@@ -14,7 +18,7 @@ setup(
     package_data={},
     author="North14",
     description="Python wrapper for Unofficial Avanza API",
-    long_description=long_description,
+    long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
     url="https://github.com/North14/avanza",
     classifiers=[

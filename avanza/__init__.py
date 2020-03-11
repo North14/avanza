@@ -1,3 +1,3 @@
 from .ticker import Ticker
-from .collection import *
-from .chartdata import *
+from . import chartdata, collection
+from ._version import __version__
