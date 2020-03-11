@@ -38,7 +38,7 @@ More examples can be found
    :target: https://avanza.readthedocs.io/
    :alt: Read the Docs
 
-.. |lint| image:: https://img.shields.io/github/workflow/status/North14/avanza/Python\ lint?style=flat-square&logo=github&label=lint\ and\ test
+.. |lint| image:: https://img.shields.io/github/workflow/status/North14/avanza/python-lint?style=flat-square&logo=github&label=lint%20and%20test
    :alt: GitHub Workflow Status
 
 .. |pypi_version| image:: https://img.shields.io/pypi/v/avanza?style=flat-square&logo=pypi
