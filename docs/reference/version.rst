@@ -7,4 +7,6 @@ Version
 .. toctree::
    :maxdepth: 2
 
-.. automodule:: avanza.__version__
+.. data:: avanza.__version__
+    
+   Get the current version in string format

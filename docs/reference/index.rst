@@ -4,7 +4,7 @@ API Reference
 .. toctree::
    :maxdepth: 2
 
-   version.rst
+   ticker.rst
    collection.rst
    chartdata.rst
-   ticker.rst
+   version.rst
