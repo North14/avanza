@@ -8,11 +8,15 @@ from .constants import constants, BASE_URL
 
 class Base:
     def __init__(self):
-        """ Start python requests session """
+        """Base class which other classes/function uses
+
+        Attributes:
+            session: initiates request session
+        """
         self.session = requests.Session()
 
     def _test_auth(self):
-        """ Tests authentication by checking response of positions page """
+        """Tests authentication by checking response of positions page"""
         url = f"{BASE_URL}{constants['paths']['POSITIONS_PATH']}"
         response = self.session.get(url)
         if response.ok:
@@ -20,7 +24,7 @@ class Base:
         return False
 
     def _authenticate(self):
-        """ Tests authentication using cookies """
+        """Tests authentication using cookies"""
         if not self._test_auth():
             if path.isfile('.cookies'):
                 with open('.cookies', 'r+b') as f:
@@ -37,26 +41,27 @@ class Base:
                     pickle.dump(self.session.cookies, f)
 
     def _request(self, url, auth=False):
-        """
-        download json of url with python request session
+        """Download json of url with python request session
 
-        :type url: string
-        :param url: link to be requested
-        :type auth: boolean
-        :param auth: auth=True if request need authentication
-        :return: json of url
+        Args:
+            url (str): link to be requested
+            auth (bool): auth=True if request need authentication
+
+        Returns:
+            dict: json python dict of url
         """
         if auth:
             self._authenticate()
         return self.session.get(url).json()
 
     def _check_timePeriod(self, timePeriod):
-        """
-        Checks if arg timePeriod is a valid time period
+        """Checks if arg timePeriod is a valid time period
 
-        :type timePeriod: string
-        :param timePeriod: time period
-        :rtype: boolean
+        Args:
+            timePeriod (str): time period
+
+        Returns:
+            bool
         """
         for period in constants['public']['chartdata']:
             if timePeriod == constants['public']['chartdata'][period]:

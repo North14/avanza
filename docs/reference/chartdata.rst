@@ -1,10 +1,12 @@
 .. currentmodule:: avanza.chartdata
 
-======
-Charts
-======
+=========
+Chartdata
+=========
+
+.. toctree::
+   :maxdepth: 2
 
 .. automodule:: avanza.chartdata
    :members:
-   :undoc-members:
    :show-inheritance:

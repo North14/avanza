@@ -4,7 +4,9 @@
 Ticker
 =======
 
+.. toctree::
+   :maxdepth: 2
+
 .. autoclass:: avanza.Ticker
    :members:
-   :undoc-members:
    :show-inheritance:

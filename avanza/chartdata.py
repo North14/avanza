@@ -4,13 +4,16 @@ from .constants import constants, BASE_URL
 from .base import Base
 
 def get_overview_chartdata(timePeriod='one_month'):
-    """
-    Returns chartdata from overview page
+    """Returns chartdata from overview page
 
-    :type timePeriod: string
-    :param timePeriod: time period 
+    Args:
+        timePeriod (str): time period
 
-    .. note:: Authentication necessary
+    Returns:
+        dict:
+
+    Note:
+        Authentication necessary
     """
     timePeriod = timePeriod.upper()
     url = f"{BASE_URL}{constants['paths']['CHARTDATA_OVERVIEW']}".format(timePeriod)
@@ -20,21 +23,25 @@ def get_overview_chartdata(timePeriod='one_month'):
         raise Exception("Invalid timePeriod!")
 
 def get_distribution_chartdata():
-    """
-    Returns values from account distribution chart
+    """Returns values from account distribution chart
 
-    .. note:: Authentication necessary
+    Returns:
+        dict:
+
+    Note:
+        Authentication necessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['CHARTDATA_DISTRIBUTION']}", auth=True)
 
 def get_ticker_chartdata(orderbookId, timePeriod='today'):
-    """
-    Returns chartdata of ticker
+    """Returns chartdata of ticker
     
-    :type orderbookId: int
-    :param orderbookId: id of instrument
-    :type timePeriod: string
-    :param timePeriod: time period
+    Args:
+        orderbookId (int): id of instrument
+        timePeriod (str): time period
+    
+    Returns:
+        dict:
     """
     timePeriod = timePeriod.upper()
     url = f"{BASE_URL}{constants['paths']['CHARTDATA_PATH']}".format(orderbookId, timePeriod)

@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
+import avanza
 
 with open("README.rst", "r") as f:
     LONG_DESCRIPTION = f.read()
 
 
-with open("avanza/_version", "r") as f:
-    VERSION = f.read()
+VERSION = avanza.__version__
 
 setup(
     name="Avanza",

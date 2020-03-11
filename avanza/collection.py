@@ -4,20 +4,24 @@ from .constants import constants, BASE_URL
 from .base import Base
 
 def search(searchQuery):
-    """
-    Returns results of search query
+    """Returns results of search query
 
-    :type searchQuery: string
-    :param searchQuery: string to be searched at Avanza
+    Args:
+        searchQuery (str): The string to be searched at Avanza
+    
+    Returns:
+        dict:
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['SEARCH']}".format(searchQuery))
 
 def get_news(index=5):
-    """
-    Returns x amount of news
+    """Returns x amount of news
 
-    :type index: int
-    :param index: amount of news to be returned
+    Args:
+        index (int): Amount of news to be returned
+    
+    Returns:
+        dict:
     """
     try:
         int(index)
@@ -26,13 +30,16 @@ def get_news(index=5):
         logging.error("index must be int")
 
 def get_account_overview(accountId):
-    """
-    Returns information about accounts watchlists
-
-    :type accountId: int
-    :param accountId: id of account
+    """Returns information about accounts watchlists
     
-    .. note:: Authentication necessary
+    Args:
+        accountId (int): id of account
+    
+    Returns:
+        dict:
+    
+    Note:
+        Authentication neccessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['ACCOUNT_OVERVIEW_PATH']}".format(accountId), auth=True)
 
@@ -40,10 +47,14 @@ def get_transactions(accountId=None):
     """
     Returns information about accounts watchlists
 
-    :type accountId: int
-    :param accountId: id of account, not neccessary
+    Args:
+        accountId (int, optional): id of account
     
-    .. note:: Authentication necessary
+    Returns:
+        dict:
+    
+    Note:
+        Authentication neccessary
     """
     url = f"{BASE_URL}{constants['paths']['TRANSACTIONS_PATH']}"
     if accountId:
@@ -54,10 +65,14 @@ def get_insight(timePeriod="today"):
     """
     Returns accounts
 
-    :type timePeriod: string
-    :param timePeriod: time period
+    Args:
+        timePeriod (str): time period
     
-    .. note:: Authentication necessary
+    Returns:
+        dict:
+    
+    Note:
+        Authentication neccessary
     """
     timePeriod = timePeriod.upper()
     url = f"{BASE_URL}{constants['paths']['INSIGHT']}".format(timePeriod)
@@ -67,57 +82,78 @@ def get_insight(timePeriod="today"):
         raise Exception("Invalid timePeriod!")
 
 def get_watchlists():
-    """
-    Returns information about accounts watchlists
+    """Returns information about accounts watchlists
     
-    .. note:: Authentication necessary
+    Returns:
+        dict:
+    
+    Note:
+        Authentication neccessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['WATCHLISTS_PATH']}", auth=True)
 
 def get_positions():
-    """
-    Returns information about accounts positions
+    """Returns information about accounts positions
     
-    .. note:: Authentication necessary
+    Returns:
+        dict:
+    
+    Note:
+        Authentication neccessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['POSITIONS_PATH']}", auth=True)
 
 def get_deals_and_orders():
-    """
-    Returns deals, orders and accounts
+    """Returns deals, orders and accounts
     
-    .. note:: Authentication necessary
+    Returns:
+        dict:
+    
+    Note:
+        Authentication neccessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['DEALS_AND_ORDERS_PATH']}", auth=True)
 
 def get_feed():
-    """
-    Returns feed from Home
+    """Returns feed from Home
     
-    .. note:: Authentication necessary
+    Returns:
+        dict:
+    
+    Note:
+        Authentication neccessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['FEED']}", auth=True)
 
 def get_accounts():
-    """
-    Returns accounts
+    """Returns accounts
     
-    .. note:: Authentication necessary
+    Returns:
+        dict:
+    
+    Note:
+        Authentication neccessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['ACCOUNTS']}", auth=True)
 
 def get_inspiration_list():
-    """
-    Returns inspiration list
+    """Returns inspiration list
     
-    .. note:: Authentication necessary
+    Returns:
+        dict:
+    
+    Note:
+        Authentication neccessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['INSPIRATION_LIST_PATH']}")
 
 def get_account_summary():
-    """
-    Returns account summary
+    """Returns account summary
     
-    .. note:: Authentication necessary
+    Returns:
+        dict:
+    
+    Note:
+        Authentication neccessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['CATEGORIZED_ACCOUNTS']}", auth=True)
