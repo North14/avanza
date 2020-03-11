@@ -2,3 +2,4 @@ requests
 selenium
 flake8
 bandit
+pytest
