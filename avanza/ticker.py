@@ -31,7 +31,11 @@ class Ticker(Base):
 
     @property
     def info(self):
-        """ Return full json of ticker call """
+        """
+        Return full json of ticker call
+        
+        :rtype: string
+        """
         return self.data
 
     @property

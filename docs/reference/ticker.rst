@@ -4,7 +4,7 @@
 Ticker
 =======
 
-.. automodule:: avanza.Ticker
+.. autoclass:: avanza.Ticker
    :members:
    :undoc-members:
    :show-inheritance:

@@ -1,9 +1,9 @@
-Reference
+API Reference
 =========
 
 .. toctree::
    :maxdepth: 2
 
-   ticker
-   collection
-   charts
+.. include:: collection.rst
+.. include:: chartdata.rst
+.. include:: ticker.rst

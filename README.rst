@@ -2,8 +2,8 @@ Avanza
 ======
 
 =========== ====
-**docs**    |docs|
 **tests**   |lint|
+            |docs|
 **package** |pypi_version|
             |pypi_license|
             |pypi_pversion|
@@ -36,7 +36,7 @@ More examples can be found
    :target: https://avanza.readthedocs.io/
    :alt: Read the Docs
 
-.. |lint| image:: https://img.shields.io/github/workflow/status/North14/avanza/Python\ lint?style=flat-square&logo=github
+.. |lint| image:: https://img.shields.io/github/workflow/status/North14/avanza/Python\ lint?style=flat-square&logo=github&label=lint\ and\ test
    :alt: GitHub Workflow Status
 
 .. |pypi_version| image:: https://img.shields.io/pypi/v/avanza?style=flat-square&logo=pypi
