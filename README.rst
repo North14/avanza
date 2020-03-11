@@ -32,6 +32,8 @@ Short example of getting the current buyprice for msft stock:
 More examples can be found
 `here <https://github.com/North14/avanza-client>`__
 
+`Documentation <https://avanza.readthedocs.io/en/latest/>`__
+
 .. |docs| image:: https://img.shields.io/readthedocs/avanza?style=flat-square&logo=read-the-docs
    :target: https://avanza.readthedocs.io/
    :alt: Read the Docs
