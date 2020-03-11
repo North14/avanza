@@ -1,3 +1,4 @@
 requests
 selenium
-tox
+flake8
+bandit

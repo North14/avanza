@@ -1,6 +1,6 @@
 # This workflow will install Python dependencies and lint with a single version of Python
 
-name: Python lint
+name: python-lint
 
 on:
   push:
@@ -33,7 +33,11 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=avanza/constants.py
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --exclude=avanza/constants.py
-    - name: Test code
+    - name: Test code with pytest
       run: |
         pip install pytest
         pytest
+    - name: Security lint with bandit
+      run: |
+        pip install bandit
+        bandit -r avanza
