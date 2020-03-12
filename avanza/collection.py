@@ -1,5 +1,8 @@
+import logging
+
 from .constants import constants, BASE_URL
 from .base import Base
+
 
 def get_news(index=5):
     """Returns x amount of news
@@ -16,6 +19,7 @@ def get_news(index=5):
     except ValueError:
         logging.error("index must be int")
 
+
 def get_account_overview(accountId):
     """Returns information about accounts watchlists
     
@@ -29,6 +33,7 @@ def get_account_overview(accountId):
         Authentication neccessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['ACCOUNT_OVERVIEW_PATH']}".format(accountId), auth=True)
+
 
 def get_transactions(accountId=None):
     """
@@ -47,6 +52,7 @@ def get_transactions(accountId=None):
     if accountId:
         return Base()._request(url.format(accountId), auth=True)
     return Base()._request(url.replace('{0:d}', ''), auth=True)
+
 
 def get_insight(timePeriod="today"):
     """
@@ -68,6 +74,7 @@ def get_insight(timePeriod="today"):
     else:
         raise Exception("Invalid timePeriod!")
 
+
 def get_watchlists():
     """Returns information about accounts watchlists
     
@@ -78,6 +85,7 @@ def get_watchlists():
         Authentication neccessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['WATCHLISTS_PATH']}", auth=True)
+
 
 def get_positions():
     """Returns information about accounts positions
@@ -90,6 +98,7 @@ def get_positions():
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['POSITIONS_PATH']}", auth=True)
 
+
 def get_deals_and_orders():
     """Returns deals, orders and accounts
     
@@ -100,6 +109,7 @@ def get_deals_and_orders():
         Authentication neccessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['DEALS_AND_ORDERS_PATH']}", auth=True)
+
 
 def get_feed():
     """Returns feed from Home
@@ -112,6 +122,7 @@ def get_feed():
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['FEED']}", auth=True)
 
+
 def get_accounts():
     """Returns accounts
     
@@ -122,6 +133,7 @@ def get_accounts():
         Authentication neccessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['ACCOUNTS']}", auth=True)
+
 
 def get_inspiration_list():
     """Returns inspiration list
@@ -134,12 +146,12 @@ def get_inspiration_list():
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['INSPIRATION_LIST_PATH']}")
 
+
 def get_account_summary():
     """Returns account summary
     
     Returns:
         dict:
-    
     Note:
         Authentication neccessary
     """
