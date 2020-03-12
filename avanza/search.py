@@ -1,19 +1,22 @@
+import json
+
 from .constants import constants, BASE_URL
 from .base import Base
 
 
 class Search(Base):
     def __init__(self, search_query):
-        self.search_query = search_query
-
-    def search(self, searchQuery):
         """Returns results of search query
 
         Args:
             searchQuery (str): The string to be searched at Avanza
-
-        Returns:
-            dict:
         """
-        url = f"{BASE_URL}{constants['paths']['SEARCH']}".format(searchQuery)
-        return self._request(url)
+        super().__init__()
+        url = f"{BASE_URL}{constants['paths']['SEARCH']}".format(search_query)
+        self.data = self._request(url)
+
+    def __str__(self):
+        return json.dumps(self.data)
+
+    def info(self):
+        return self.data
