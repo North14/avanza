@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-
 import logging
 import json
 
 from .constants import constants, BASE_URL
 from .base import Base
+
 
 class Ticker(Base):
     def __init__(self, orderbookId, instrument='stock', auth=False):
@@ -20,10 +20,8 @@ class Ticker(Base):
         """
         super().__init__()
         if instrument in ['fund', 'certificate', 'stock']:
-            if auth:
-                self.data = self._request(f"{BASE_URL}{constants['paths']['INSTRUMENT_PATH']}".format(instrument, orderbookId), auth=None)
-            else:
-                self.data = self._request(f"{BASE_URL}{constants['paths']['INSTRUMENT_PATH']}".format(instrument, orderbookId))
+            url = f"{BASE_URL}{constants['paths']['INSTRUMENT_PATH']}".format(instrument, orderbookId)
+            self.data = self._request(url, auth=auth)
         else:
             raise TypeError("Invalid option!")
 
@@ -35,7 +33,7 @@ class Ticker(Base):
         """Grabs full json of ticker call
         
         Returns:
-            dict: full json in python dictionary
+            dict:
         """
         return self.data
 
@@ -44,7 +42,7 @@ class Ticker(Base):
         """Grabs buy price of ticker
         
         Returns:
-            float: Returns buy price in currency
+            float:
         """
         return self.data['buyPrice']
 
@@ -53,7 +51,7 @@ class Ticker(Base):
         """Grabs buy sell of ticker
         
         Returns:
-            float: Returns sell price in currency
+            float:
         """
         return self.data['sellPrice']
 
@@ -62,7 +60,7 @@ class Ticker(Base):
         """Grabs last price of ticker
         
         Returns:
-            float: Returns last price in currency
+            float:
         """
         return self.data['lastPrice']
 
@@ -71,7 +69,7 @@ class Ticker(Base):
         """Grabs highest price of ticker
         
         Returns:
-            float: Returns highest price in currency
+            float:
         """
         return self.data['highestPrice']
 
@@ -80,7 +78,7 @@ class Ticker(Base):
         """Grabs lowest price of ticker
         
         Returns:
-            float: Returns lowest price in currency
+            float:
         """
         return self.data['lowestPrice']
 
@@ -89,7 +87,7 @@ class Ticker(Base):
         """Grabs symbol of ticker
         
         Returns:
-            str: Returns symbol of ticker
+            str:
         """
         return self.data['tickerSymbol']
 
@@ -98,7 +96,7 @@ class Ticker(Base):
         """Grabs currency of ticker
         
         Returns:
-            str: Returns currency of ticker
+            str:
         """
         return self.data['currency']
 
@@ -107,7 +105,7 @@ class Ticker(Base):
         """Grabs ISIN of ticker
         
         Returns:
-            str: Returns ISIN of ticker
+            str:
         """
         return self.data['isin']
 
@@ -116,7 +114,7 @@ class Ticker(Base):
         """Grabs marketplace of ticker
         
         Returns:
-            str: Returns marketplace of ticker
+            str:
         """
         return self.data['marketPlace']
 
@@ -125,7 +123,7 @@ class Ticker(Base):
         """Grabs full name of ticker
         
         Returns:
-            str: Returns full name
+            str:
         """
         return self.data['name']
 
@@ -134,7 +132,7 @@ class Ticker(Base):
         """Grabs change price of ticker
         
         Returns:
-            int: Returns change in currency
+            int:
         """
         return self.data['change']
 
@@ -143,7 +141,7 @@ class Ticker(Base):
         """Grabs change price of ticker in percent
         
         Returns:
-            int: Returns chagen in percent
+            int:
         """
         return self.data['changePercent']
 
@@ -152,7 +150,7 @@ class Ticker(Base):
         """Grabs flag code of ticker
         
         Returns:
-            str: Returns two letter flag code
+            str:
         """
         return self.data['flagCode']
 
@@ -161,7 +159,7 @@ class Ticker(Base):
         """Grabs the country of ticker
         
         Returns:
-            str: Returns country of ticker
+            str:
         """
         return self.data['country']
 
@@ -170,7 +168,7 @@ class Ticker(Base):
         """Grabs the id of ticker
         
         Returns:
-            int: Return Avanza id of instrument
+            int:
         """
         return self.data['id']
 
@@ -179,7 +177,7 @@ class Ticker(Base):
         """Grabs last time quote was updated
         
         Returns:
-            str: Returns date in ISO 8601
+            str: ISO 8601
         """
         return self.data['quoteUpdated']
 
@@ -188,6 +186,6 @@ class Ticker(Base):
         """Grabs last time price was updated
         
         Returns:
-            str: Returns date in ISO 8601
+            str: ISO 8601
         """
         return self.data['lastPriceUpdated']
