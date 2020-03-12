@@ -1,18 +1,5 @@
-import logging
-
 from .constants import constants, BASE_URL
 from .base import Base
-
-def search(searchQuery):
-    """Returns results of search query
-
-    Args:
-        searchQuery (str): The string to be searched at Avanza
-    
-    Returns:
-        dict:
-    """
-    return Base()._request(f"{BASE_URL}{constants['paths']['SEARCH']}".format(searchQuery))
 
 def get_news(index=5):
     """Returns x amount of news
