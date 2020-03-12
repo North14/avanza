@@ -39,6 +39,7 @@ def get_transactions(accountId=None):
     """
     Returns information about accounts watchlists
 
+
     Args:
         accountId (int, optional): id of account
     
