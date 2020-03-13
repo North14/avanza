@@ -18,6 +18,7 @@ class Search(Base):
     def __str__(self):
         return json.dumps(self.data)
 
+    @property
     def info(self):
         """Grabs full json of ticker call
 
@@ -26,6 +27,7 @@ class Search(Base):
         """
         return self.data
 
+    @property
     def results(self):
         """Grabs the list of results
 
@@ -34,6 +36,7 @@ class Search(Base):
         """
         return self.data['resultGroups']
 
+    @property
     def first(self):
         """Grabs the first result
 
@@ -45,6 +48,7 @@ class Search(Base):
         """
         return self.data['resultGroups'][0]
 
+    @property
     def count(self):
         """Grabs total number of hits
 
@@ -53,6 +57,7 @@ class Search(Base):
         """
         return self.data['totalNumberOfHits']
 
+    @property
     def by_instrument(self, instrument):
         """Grabs the results filtered by instrument type
 
@@ -71,4 +76,3 @@ class Search(Base):
             return list1
         else:
             raise Exception("Invalid instrument")
-
