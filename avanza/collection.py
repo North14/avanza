@@ -4,22 +4,6 @@ from .constants import constants, BASE_URL
 from .base import Base
 
 
-def get_news(index=5):
-    """Returns x amount of news
-
-    Args:
-        index (int): Amount of news to be returned
-    
-    Returns:
-        dict:
-    """
-    try:
-        int(index)
-        return Base()._request(f"{BASE_URL}{constants['paths']['NEWS']}".format(index))
-    except ValueError:
-        logging.error("index must be int")
-
-
 def get_account_overview(accountId):
     """Returns information about accounts watchlists
     
