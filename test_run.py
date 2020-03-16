@@ -15,7 +15,7 @@ def test_buy_price():
 def test_ticker_chartdata():
     chartdata = avanza.ChartData().get_ticker_chartdata(3873)
     print(chartdata)
-    if 'statusCode' not in chartdata:
+    if not chartdata.empty:
         print("test_ticker_chartdata: OK")
     else:
         raise Exception("test_ticker_chartdata: ERROR")
