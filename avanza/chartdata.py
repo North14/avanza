@@ -7,7 +7,7 @@ from .base import Base
 
 
 class ChartData(Base):
-    """Grab json data and output as pandas DataFrame"""
+    """Grab json chartdata and output as pandas DataFrame"""
     def get_overview_chartdata(self, timePeriod='one_month'):
         """Returns chartdata from overview page
 
@@ -36,19 +36,29 @@ class ChartData(Base):
             raise Exception("Invalid timePeriod!")
 
     def get_distribution_chartdata(self):
-        """Returns values from account distribution chart
+        """Returns values from account distribution pie chart
 
         Returns:
             dict:
 
         Note:
             Authentication necessary
+            Will not keep original drilldown
         """
         url = f"{BASE_URL}{constants['paths']['CHARTDATA_DISTRIBUTION']}"
-        return self._request(url, auth=True)
+        r = self._request(url, auth=True)
+        pie_dict_list = []
+        for x in r:
+            if x['drilldownSeries']:
+                for drilldown in x['drilldownSeries']:
+                    pie_dict_list.append(drilldown)
+            else:
+                x.pop('drilldownSeries', None)
+                pie_dict_list.append(x)
+        return pandas.read_json(json.dumps(pie_dict_list))
 
-    def get_ticker_chartdata(self, orderbookId, timePeriod='today'):
-        """Returns chartdata of ticker
+    def get_ticker_chartdata(self, orderbookId, timePeriod='one_week'):
+        """Returns daily chartdata of ticker
 
         Args:
             orderbookId (int): id of instrument
