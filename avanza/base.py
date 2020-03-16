@@ -1,10 +1,10 @@
 import logging
 import requests
-import pickle
-from os import path
-from selenium import webdriver
 
 from .constants import constants, BASE_URL
+
+logger = logging.getlogger(__name__)
+
 
 class Base:
     def __init__(self):
@@ -20,25 +20,36 @@ class Base:
         url = f"{BASE_URL}{constants['paths']['POSITIONS_PATH']}"
         response = self.session.get(url)
         if response.ok:
+            logger.info("Authentication successful")
             return True
+        logger.info("Not authenticated")
         return False
 
     def _authenticate(self):
         """Tests authentication using cookies"""
         if not self._test_auth():
+            import pickle
+            from os import path
             if path.isfile('.cookies'):
                 with open('.cookies', 'r+b') as f:
                     self.session.cookies.update(pickle.load(f))
+                if self._test_auth():
+                    return
             if not self._test_auth():
-                driver = webdriver.Firefox()
-                driver.get(f"{BASE_URL}{constants['paths']['LOGIN']}")
-                while True:
-                    if driver.current_url == f"{BASE_URL}{constants['paths']['HOME']}":
-                        [self.session.cookies.set(c['name'], c['value']) for c in driver.get_cookies()]
-                        driver.close()
-                        break
+                from selenium import webdriver
+                from selenium.webdriver.support.ui import WebDriverWait
+                from selenium.webdriver.support import expected_conditions
+
+                with webdriver.Firefox() as driver:
+                    wait = WebDriverWait(driver, 1200)
+                    driver.get(f"{BASE_URL}{constants['paths']['LOGIN']}")
+                    wait.until(expected_conditions.title_is("Hem"))
+                    [self.session.cookies.set(c['name'], c['value']) for c in driver.get_cookies()]
                 with open('.cookies', 'w+b') as f:
                     pickle.dump(self.session.cookies, f)
+        if not self._test_auth():
+            logger.critical("Authentication error")
+            raise Exception("Authentication error")
 
     def _request(self, url, auth=False):
         """Download json of url with python request session
