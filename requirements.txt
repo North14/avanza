@@ -1,5 +1,6 @@
 requests
 selenium
+pandas
 flake8
 bandit
 pytest
