@@ -29,6 +29,17 @@ Short example of getting the current buyprice for msft stock:
    print(price)
    > 166.48
 
+Short example of displaying graph price of msft stock, using matplotlib:
+
+.. code:: python
+
+  import avanza
+  import matplotlib.pyplot as plt
+
+  df = avanza.ChartData().get_ticker_chartdata(3873)
+  df.plot(kind='line', x='timestamp', y='value')
+  plt.show()
+
 More examples can be found
 `here <https://github.com/North14/avanza-client>`__
 

@@ -14,6 +14,7 @@ setup(
     install_requires=[
         "requests",
         "selenium",
+        "pandas",
         ],
     package_data={},
     author="North14",
