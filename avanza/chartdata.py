@@ -42,7 +42,7 @@ class ChartData(Base):
             dict:
 
         Note:
-            Authentication necessary
+            Authentication necessary\n
             Will not keep original drilldown
         """
         url = f"{BASE_URL}{constants['paths']['CHARTDATA_DISTRIBUTION']}"
