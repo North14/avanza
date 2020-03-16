@@ -1,9 +1,8 @@
 from setuptools import setup, find_packages
 import avanza
+import pypandoc
 
-with open("README.rst", "r") as f:
-    LONG_DESCRIPTION = f.read()
-
+LONG_DESCRIPTION = pypandoc.convert_file('README.rst', 'md')
 
 VERSION = avanza.__version__
 
