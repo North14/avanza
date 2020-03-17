@@ -3,7 +3,7 @@ import requests
 
 from .constants import constants, BASE_URL
 
-logger = logging.getlogger(__name__)
+logger = logging.getLogger(__name__)
 
 
 class Base:
@@ -20,9 +20,7 @@ class Base:
         url = f"{BASE_URL}{constants['paths']['POSITIONS_PATH']}"
         response = self.session.get(url)
         if response.ok:
-            logger.info("Authentication successful")
             return True
-        logger.info("Not authenticated")
         return False
 
     def _authenticate(self):
@@ -48,7 +46,6 @@ class Base:
                 with open('.cookies', 'w+b') as f:
                     pickle.dump(self.session.cookies, f)
         if not self._test_auth():
-            logger.critical("Authentication error")
             raise Exception("Authentication error")
 
     def _request(self, url, auth=False):
