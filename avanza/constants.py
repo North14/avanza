@@ -17,7 +17,8 @@ constants['paths']['INSPIRATION_LIST_PATH'] =      '/_mobile/marketing/inspirati
 constants['paths']['TRANSACTIONS_PATH'] =          '/_mobile/account/transactions/{0:d}'
 constants['paths']['CATEGORIZED_ACCOUNTS'] =       '/_cqbe/ff/overview/categorizedAccounts'
 
-constants['paths']['CHARTDATA_PATH'] =             '/_mobile/chart/orderbook/{0:d}?timePeriod={1:s}'
+# constants['paths']['CHARTDATA_PATH'] =             '/_mobile/chart/orderbook/{0:d}?timePeriod={1:s}'
+constants['paths']['CHARTDATA_PATH'] =             '/ab/component/highstockchart/getchart/orderbook'
 constants['paths']['CHARTDATA_OVERVIEW'] =         '/_cqbe/ff/overview/chart/{}'
 constants['paths']['CHARTDATA_DISTRIBUTION'] =     '/ab/component/accountsdistribution/chart'
 
