@@ -1,4 +1,5 @@
 import logging
+logger = logging.getLogger(__name__)
 import json
 import pandas
 
@@ -31,7 +32,8 @@ class ChartData(Base):
                     point.update(serie['performance'])
                     point.pop('decimalPrecision')
                     data_series.append(point)
-            return pandas.read_json(json.dumps(data_series))
+                logger.debug("Try return")
+                return pandas.read_json(json.dumps(data_series))
         else:
             raise Exception("Invalid timePeriod!")
 

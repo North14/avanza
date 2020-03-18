@@ -1,9 +1,8 @@
 import logging
+logger = logging.getLogger(__name__)
 import requests
 
 from .constants import constants, BASE_URL
-
-logger = logging.getLogger(__name__)
 
 
 class Base:
@@ -73,6 +72,8 @@ class Base:
         """
         for period in constants['public']['chartdata']:
             if timePeriod == constants['public']['chartdata'][period]:
+                logger.debug("Valid time period")
                 return True
         else:
+            logger.debug("Invalid time period")
             return False
