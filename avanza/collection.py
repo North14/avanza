@@ -139,7 +139,3 @@ def get_account_summary():
         Authentication neccessary
     """
     return Base()._request(f"{BASE_URL}{constants['paths']['CATEGORIZED_ACCOUNTS']}", auth=True)
-
-def get_payload_test():
-    p = {"orderbookId":1042867,"chartType":"AREA","widthOfPlotContainer":558,"chartResolution":"TEN_MINUTES","navigator":true,"percentage":false,"volume":false,"owners":false,"timePeriod":"week","ta":[],"compareIds":[155541]}
-    return 
