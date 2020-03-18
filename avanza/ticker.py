@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import logging
 import json
 
 from .constants import constants, BASE_URL
@@ -31,7 +30,7 @@ class Ticker(Base):
     @property
     def info(self):
         """Grabs full json of ticker call
-        
+
         Returns:
             dict:
         """
@@ -40,7 +39,7 @@ class Ticker(Base):
     @property
     def buy_price(self):
         """Grabs buy price of ticker
-        
+
         Returns:
             float:
         """
@@ -49,7 +48,7 @@ class Ticker(Base):
     @property
     def sell_price(self):
         """Grabs buy sell of ticker
-        
+
         Returns:
             float:
         """
@@ -58,7 +57,7 @@ class Ticker(Base):
     @property
     def last_price(self):
         """Grabs last price of ticker
-        
+
         Returns:
             float:
         """
@@ -67,7 +66,7 @@ class Ticker(Base):
     @property
     def highest_price(self):
         """Grabs highest price of ticker
-        
+
         Returns:
             float:
         """
@@ -76,7 +75,7 @@ class Ticker(Base):
     @property
     def lowest_price(self):
         """Grabs lowest price of ticker
-        
+
         Returns:
             float:
         """
@@ -85,7 +84,7 @@ class Ticker(Base):
     @property
     def symbol(self):
         """Grabs symbol of ticker
-        
+
         Returns:
             str:
         """
@@ -94,7 +93,7 @@ class Ticker(Base):
     @property
     def currency(self):
         """Grabs currency of ticker
-        
+
         Returns:
             str:
         """
@@ -103,7 +102,7 @@ class Ticker(Base):
     @property
     def isin(self):
         """Grabs ISIN of ticker
-        
+
         Returns:
             str:
         """
@@ -112,7 +111,7 @@ class Ticker(Base):
     @property
     def marketplace(self):
         """Grabs marketplace of ticker
-        
+
         Returns:
             str:
         """
@@ -121,7 +120,7 @@ class Ticker(Base):
     @property
     def name(self):
         """Grabs full name of ticker
-        
+
         Returns:
             str:
         """
@@ -130,7 +129,7 @@ class Ticker(Base):
     @property
     def change(self):
         """Grabs change price of ticker
-        
+
         Returns:
             int:
         """
@@ -139,7 +138,7 @@ class Ticker(Base):
     @property
     def change_percent(self):
         """Grabs change price of ticker in percent
-        
+
         Returns:
             int:
         """
@@ -148,7 +147,7 @@ class Ticker(Base):
     @property
     def flag_code(self):
         """Grabs flag code of ticker
-        
+
         Returns:
             str:
         """
@@ -157,7 +156,7 @@ class Ticker(Base):
     @property
     def country(self):
         """Grabs the country of ticker
-        
+
         Returns:
             str:
         """
@@ -166,7 +165,7 @@ class Ticker(Base):
     @property
     def id(self):
         """Grabs the id of ticker
-        
+
         Returns:
             int:
         """
@@ -175,7 +174,7 @@ class Ticker(Base):
     @property
     def quote_updated(self):
         """Grabs last time quote was updated
-        
+
         Returns:
             str: ISO 8601
         """
@@ -184,7 +183,7 @@ class Ticker(Base):
     @property
     def last_price_updated(self):
         """Grabs last time price was updated
-        
+
         Returns:
             str: ISO 8601
         """
