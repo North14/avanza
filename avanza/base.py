@@ -72,11 +72,19 @@ class Base:
             self._authenticate()
         if method == "POST":
             import json
-            return self.session.post(url, data=json.dumps(p), headers=h).json()
+            r = self.session.post(url, data=json.dumps(p), headers=h).json()
         elif method == "GET":
-            return self.session.get(url, params=p, headers=h).json()
+            r = self.session.get(url, params=p, headers=h).json()
         else:
-            raise Exception("error _request")
+            raise Exception("error invalid method for _request")
+        if 'statusCode' in r:
+            logger.debug(f"Error while retrieving json {r['time']}: {r['statusCode']} - {r['message']}")
+            if r['errors']:
+                logger.debug(f"Error while retrieving json {r['time']}: {r['errors']}")
+            if r['additional']:
+                logger.debug(f"Error while retrieving json {r['time']}: {r['additional']}")
+            raise Exception("Error while retrieving json")
+        return r
 
     def _check_timePeriod(self, time_period):
         """Checks if arg timePeriod is a valid time period
