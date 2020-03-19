@@ -58,7 +58,7 @@ class Base:
             logger.debug("Authentication using selenium unsuccessful")
         assert self._auth_ok
 
-    def _request(self, url, auth=False):
+    def _request(self, url, p={}, h={}, method="GET", auth=False):
         """Download json of url with python request session
 
         Args:
@@ -70,7 +70,13 @@ class Base:
         """
         if auth and not self._auth_ok:
             self._authenticate()
-        return self.session.get(url).json()
+        if method == "POST":
+            import json
+            return self.session.post(url, data=json.dumps(p), headers=h).json()
+        elif method == "GET":
+            return self.session.get(url, params=p, headers=h).json()
+        else:
+            raise Exception("error _request")
 
     def _check_timePeriod(self, time_period):
         """Checks if arg timePeriod is a valid time period

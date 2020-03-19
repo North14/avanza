@@ -1,5 +1,9 @@
 import json
-import pandas
+try:
+    import pandas
+    pandas_imported = True
+except ImportError:
+    pandas_import = False
 
 from .constants import constants, BASE_URL
 from .base import Base
@@ -7,70 +11,120 @@ from .base import Base
 
 class ChartData(Base):
     """Grab json chartdata and output as pandas DataFrame"""
-    def get_overview_chartdata(self, timePeriod='one_month'):
+    def get_overview_chartdata(self, time_period='one_month'):
         """Returns chartdata from overview page
 
         Args:
-            timePeriod (str): time period
+            time_period (str): time period
 
         Returns:
-            dict:
+            pandas.core.frame.DataFrame: Fallback to dict if pandas is not imported
 
         Note:
             Authentication necessary
         """
-        timePeriod = timePeriod.upper()
-        url = f"{BASE_URL}{constants['paths']['CHARTDATA_OVERVIEW']}".format(timePeriod)
-        if self._check_timePeriod(timePeriod):
+        time_period = time_period.upper()
+        url = f"{BASE_URL}{constants['paths']['CHARTDATA_OVERVIEW']}".format(time_period)
+        if self._check_time_period(time_period):
             r = self._request(url, auth=True)
-            if 'absoluteSeries' in r:
-                data_series = []
-                for serie in r['absoluteSeries']:
-                    point = {'timestamp': serie['timestamp']}
-                    point.update(serie['performance'])
-                    point.pop('decimalPrecision')
-                    data_series.append(point)
+            if pandas_imported:
+                if 'absoluteSeries' in r:
+                    data_series = []
+                    for serie in r['absoluteSeries']:
+                        point = {'timestamp': serie['timestamp']}
+                        point.update(serie['performance'])
+                        point.pop('decimalPrecision')
+                        data_series.append(point)
                 return pandas.read_json(json.dumps(data_series))
+            return r
         else:
-            raise Exception("Invalid timePeriod!")
+            raise Exception("Invalid time_period!")
 
     def get_distribution_chartdata(self):
         """Returns values from account distribution pie chart
 
         Returns:
-            dict:
+            pandas.core.frame.DataFrame: Fallback to dict if pandas is not imported
 
         Note:
             Authentication necessary\n
-            Will not keep original drilldown
+            Will "unpack" original drilldown
         """
         url = f"{BASE_URL}{constants['paths']['CHARTDATA_DISTRIBUTION']}"
         r = self._request(url, auth=True)
-        pie_dict_list = []
-        for x in r:
-            if x['drilldownSeries']:
-                for drilldown in x['drilldownSeries']:
-                    pie_dict_list.append(drilldown)
-            else:
-                x.pop('drilldownSeries', None)
-                pie_dict_list.append(x)
-        return pandas.read_json(json.dumps(pie_dict_list))
+        if pandas_imported:
+            pie_dict_list = []
+            for x in r:
+                if x['drilldownSeries']:
+                    for drilldown in x['drilldownSeries']:
+                        pie_dict_list.append(drilldown)
+                else:
+                    x.pop('drilldownSeries', None)
+                    pie_dict_list.append(x)
+            return pandas.read_json(json.dumps(pie_dict_list))
+        return r
 
-    def get_ticker_chartdata(self, orderbookId, timePeriod='one_week'):
-        """Returns daily chartdata of ticker
+#    def get_ticker_chartdata(self, orderbookId, time_period='one_week'):
+#        """Returns daily chartdata of ticker
+#
+#        Args:
+#            orderbookId (int): id of instrument
+#            time_period (str): time period, default='today'
+#
+#        Returns:
+#            pandas.core.frame.DataFrame:
+#        """
+#        url = f"{BASE_URL}{constants['paths']['CHARTDATA_PATH']}".format(orderbookId, time_period.lower())
+#        if self._check_time_period(time_period.upper()):
+#            r = self._request(url)
+#            if 'dataSeries' in r:
+#                data_series = r['dataSeries']
+#            return pandas.read_json(json.dumps(data_series))
+#        else:
+#            raise Exception("Invalid time_period!")
+
+    def get_ticker_chartdata(self, orderbook_id, time_period="month",
+                             chart_type="AREA", chart_resolution="TEN_MINUTES"):
+        """Returns chartdata from overview page
 
         Args:
-            orderbookId (int): id of instrument
-            timePeriod (str): time period, default='today'
+            orderbook_id (int): Id of ticker
+            time_period (str): time period
+            chart_type (str): The kind of chartdata to retrieve
+                    
+                    - area: Data for typical line chart (default)
+                    
+                    - candlestick: Data for candlestick/ohlc chart
+                    
+                    - ohlc: Produces same result as candlestick
+
+            chart_resolution (str): resolution of chart
 
         Returns:
-            dict:
+            pandas.core.frame.DataFrame: Fallback to dict if pandas is not imported
+
+        Note:
+            Authentication necessary
         """
-        url = f"{BASE_URL}{constants['paths']['CHARTDATA_PATH']}".format(orderbookId, timePeriod.lower())
-        if self._check_timePeriod(timePeriod.upper()):
-            r = self._request(url)
-            if 'dataSeries' in r:
-                data_series = r['dataSeries']
-            return pandas.read_json(json.dumps(data_series))
-        else:
-            raise Exception("Invalid timePeriod!")
+        from datetime import datetime
+        url = f"{BASE_URL}{constants['paths']['CHARTDATA_PATH']}"
+        p = {
+            "orderbookId": orderbook_id,
+            "chartType": chart_type.upper(),
+            "chartResolution": chart_resolution.upper(),
+            "timePeriod": time_period.lower()
+            }
+        h = {"Content-Type": "application/json"}
+        r = self._request(url, p=p, h=h, method="POST")
+        if pandas_imported:
+            if 'dataPoints' in r:
+                data_series = r['dataPoints']
+                for x in data_series:
+                    x[0] = datetime.fromtimestamp(x[0]/1000).isoformat()
+                df = pandas.read_json(json.dumps(data_series))
+                if chart_type == "AREA":
+                    df.columns = ['time', 'value']
+                else:
+                    df.columns = ['time', 'opens', 'highs', 'lows', 'closes']
+                return df
+        return r
