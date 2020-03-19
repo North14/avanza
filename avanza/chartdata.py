@@ -64,38 +64,23 @@ class ChartData(Base):
             return pandas.read_json(json.dumps(pie_dict_list))
         return r
 
-#    def get_ticker_chartdata(self, orderbookId, time_period='one_week'):
-#        """Returns daily chartdata of ticker
-#
-#        Args:
-#            orderbookId (int): id of instrument
-#            time_period (str): time period, default='today'
-#
-#        Returns:
-#            pandas.core.frame.DataFrame:
-#        """
-#        url = f"{BASE_URL}{constants['paths']['CHARTDATA_PATH']}".format(orderbookId, time_period.lower())
-#        if self._check_time_period(time_period.upper()):
-#            r = self._request(url)
-#            if 'dataSeries' in r:
-#                data_series = r['dataSeries']
-#            return pandas.read_json(json.dumps(data_series))
-#        else:
-#            raise Exception("Invalid time_period!")
-
-    def get_ticker_chartdata(self, orderbook_id, time_period="month",
-                             chart_type="AREA", chart_resolution="TEN_MINUTES"):
+    def get_ticker_chartdata(self,
+                             orderbook_id,
+                             time_period="month",
+                             chart_type="AREA",
+                             chart_resolution="TEN_MINUTES"
+                             ):
         """Returns chartdata from overview page
 
         Args:
             orderbook_id (int): Id of ticker
             time_period (str): time period
             chart_type (str): The kind of chartdata to retrieve
-                    
+
                     - area: Data for typical line chart (default)
-                    
+
                     - candlestick: Data for candlestick/ohlc chart
-                    
+
                     - ohlc: Produces same result as candlestick
 
             chart_resolution (str): resolution of chart
