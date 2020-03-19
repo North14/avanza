@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 import avanza
-import pypandoc
 
-LONG_DESCRIPTION = pypandoc.convert_file('README.rst', 'md')
+with open('README.rst', 'r') as f:
+    LONG_DESCRIPTION = f.read()
 
 VERSION = avanza.__version__
 
@@ -19,7 +19,7 @@ setup(
     author="North14",
     description="Python wrapper for Unofficial Avanza API",
     long_description=LONG_DESCRIPTION,
-    long_description_content_type="text/markdown",
+    long_description_content_type="text/x-rst",
     url="https://github.com/North14/avanza",
     classifiers=[
         "License :: OSI Approved :: MIT License",
