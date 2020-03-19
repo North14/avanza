@@ -107,7 +107,6 @@ class ChartData(Base):
             Authentication necessary
         """
         from datetime import datetime
-        from matplotlib.dates import date2num
         url = f"{BASE_URL}{constants['paths']['CHARTDATA_PATH']}"
         p = {
             "orderbookId": orderbook_id,
