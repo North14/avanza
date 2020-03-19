@@ -7,20 +7,20 @@ from .base import Base
 
 
 class Ticker(Base):
-    def __init__(self, orderbookId, instrument='stock', auth=False):
-        """Request information about stock/certificate/fund/etc
+    """Request information about stock/certificate/fund/etc
 
-        Args:
-            orderbookId (int): id of instrument
-            instrument (str): Type of instrument, Defaults to 'stock'
-            auth (bool): Set true for additional information, Defaults to False
+    Args:
+        orderbook_id (int): id of ticker
+        instrument (str): Type of instrument, Defaults to 'stock'
+        auth (bool): Set true for additional information, Defaults to False
 
-        Note:
-            Additional information if authenticated
-        """
+    Note:
+        Additional information if authenticated
+    """
+    def __init__(self, orderbook_id, instrument='stock', auth=False):
         super().__init__()
         if instrument in ['fund', 'certificate', 'stock']:
-            url = f"{BASE_URL}{constants['paths']['INSTRUMENT_PATH']}".format(instrument, orderbookId)
+            url = f"{BASE_URL}{constants['paths']['INSTRUMENT_PATH']}".format(instrument, orderbook_id)
             self.data = self._request(url, auth=auth)
         else:
             raise TypeError("Invalid option!")
