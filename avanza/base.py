@@ -98,11 +98,11 @@ class Base:
             raise Exception("Error while retrieving json")
         return r
 
-    def _check_timePeriod(self, time_period):
-        """Checks if arg timePeriod is a valid time period
+    def _check_time_period(self, time_period):
+        """Checks if arg time_period is a valid time period
 
         Args:
-            timePeriod (str): time period
+            time_period (str): time period
 
         Returns:
             bool

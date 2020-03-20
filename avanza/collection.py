@@ -53,10 +53,10 @@ def get_insight(**kwargs):
     time_period = kwargs.pop('time_period', 'TODAY').upper()
     assert not kwargs
     url = f"{BASE_URL}{constants['paths']['INSIGHT']}".format(time_period)
-    if Base()._check_timePeriod(timePeriod):
+    if Base()._check_time_period(time_period):
         return Base()._request(url, auth=True)
     else:
-        raise Exception("Invalid timePeriod!")
+        raise Exception("Invalid time period!")
 
 
 def get_watchlists():
