@@ -86,16 +86,20 @@ class ChartData(Base):
         Note:
             Authentication necessary
         """
-        from datetime import datetime
+        chart_type = kwargs.pop('chart_type', 'AREA').upper()
+        chart_resolution = kwargs.pop('chart_resolution', 'TEN_MINUTES').upper()
+        time_period = kwargs.pop('time_period', 'month').lower()
+        assert not kwargs
         url = f"{BASE_URL}{constants['paths']['CHARTDATA_PATH']}"
         p = {
             "orderbookId": orderbook_id,
-            "chartType": kwargs.pop('chart_type', 'AREA').upper(),
-            "chartResolution": kwargs.pop('chart_resolution', 'TEN_MINUTES').upper(),
-            "timePeriod": kwargs.pop('time_period', 'month').lower()
+            "chartType": chart_type,
+            "chartResolution": chart_resolution,
+            "timePeriod": time_period
             }
-        assert not kwargs
         h = {"Content-Type": "application/json"}
+        
+        from datetime import datetime
         r = self._request(url, params=p, headers=h, method="POST")
         if pandas_imported:
             if 'dataPoints' in r:
