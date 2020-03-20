@@ -58,18 +58,29 @@ class Base:
             logger.debug("Authentication using selenium unsuccessful")
         assert self._auth_ok
 
-    def _request(self, url, p={}, h={}, method="GET", auth=False):
+    def _request(self, url, **kwargs):
         """Download json of url with python request session
 
         Args:
             url (str): link to be requested
             auth (bool): auth=True if request need authentication
+            params (dict): data for POST requests or params for GET request
+            headers (dict): headers for POST and GET request
+            method (str): Method of request (GET or POST)
 
         Returns:
             dict: json python dict of url
         """
+        p = kwargs.pop('params', {})
+        h = kwargs.pop('headers', {})
+        method = kwargs.pop('method', 'GET').upper()
+        assert method in ['GET', 'POST']
+        auth = kwargs.pop('auth', False)
+        assert not kwargs
+
         if auth and not self._auth_ok:
             self._authenticate()
+
         if method == "POST":
             import json
             r = self.session.post(url, data=json.dumps(p), headers=h).json()
@@ -77,6 +88,7 @@ class Base:
             r = self.session.get(url, params=p, headers=h).json()
         else:
             raise Exception("error invalid method for _request")
+
         if 'statusCode' in r:
             logger.debug(f"Error while retrieving json {r['time']}: {r['statusCode']} - {r['message']}")
             if r['errors']:
@@ -86,11 +98,11 @@ class Base:
             raise Exception("Error while retrieving json")
         return r
 
-    def _check_timePeriod(self, time_period):
-        """Checks if arg timePeriod is a valid time period
+    def _check_time_period(self, time_period):
+        """Checks if arg time_period is a valid time period
 
         Args:
-            timePeriod (str): time period
+            time_period (str): time period
 
         Returns:
             bool

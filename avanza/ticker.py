@@ -16,8 +16,10 @@ class Ticker(Base):
     Note:
         Additional information if authenticated
     """
-    def __init__(self, orderbook_id, instrument='stock', auth=False):
+    def __init__(self, orderbook_id, **kwargs):
         super().__init__()
+        instrument = kwargs.pop('instrument', 'stock').lower()
+        auth = kwargs.pop('auth', False)
         if instrument in ['fund', 'certificate', 'stock']:
             url = f"{BASE_URL}{constants['paths']['INSTRUMENT_PATH']}".format(instrument, orderbook_id)
             self.data = self._request(url, auth=auth)

@@ -64,12 +64,7 @@ class ChartData(Base):
             return pandas.read_json(json.dumps(pie_dict_list))
         return r
 
-    def get_ticker_chartdata(self,
-                             orderbook_id,
-                             time_period="month",
-                             chart_type="AREA",
-                             chart_resolution="TEN_MINUTES"
-                             ):
+    def get_ticker_chartdata(self, orderbook_id, **kwargs):
         """Returns chartdata from overview page
 
         Args:
@@ -91,16 +86,21 @@ class ChartData(Base):
         Note:
             Authentication necessary
         """
-        from datetime import datetime
+        chart_type = kwargs.pop('chart_type', 'AREA').upper()
+        chart_resolution = kwargs.pop('chart_resolution', 'TEN_MINUTES').upper()
+        time_period = kwargs.pop('time_period', 'month').lower()
+        assert not kwargs
         url = f"{BASE_URL}{constants['paths']['CHARTDATA_PATH']}"
         p = {
             "orderbookId": orderbook_id,
-            "chartType": chart_type.upper(),
-            "chartResolution": chart_resolution.upper(),
-            "timePeriod": time_period.lower()
+            "chartType": chart_type,
+            "chartResolution": chart_resolution,
+            "timePeriod": time_period
             }
         h = {"Content-Type": "application/json"}
-        r = self._request(url, p=p, h=h, method="POST")
+        
+        from datetime import datetime
+        r = self._request(url, params=p, headers=h, method="POST")
         if pandas_imported:
             if 'dataPoints' in r:
                 data_series = r['dataPoints']
