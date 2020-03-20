@@ -6,12 +6,12 @@ from .base import Base
 
 
 class News(Base):
-    def __init__(self, index):
         """Returns Avanza news
 
         Args:
             index (int): The amount of news to be returned
         """
+    def __init__(self, index):
         super().__init__()
         url = f"{BASE_URL}{constants['paths']['NEWS']}".format(index)
         self.data = self._request(url)

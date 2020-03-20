@@ -2,11 +2,11 @@ from .constants import constants, BASE_URL
 from .base import Base
 
 
-def get_account_overview(accountId):
+def get_account_overview(account_id):
     """Returns information about accounts watchlists
 
     Args:
-        accountId (int): id of account
+        account_id (int): id of account
 
     Returns:
         dict:
@@ -14,16 +14,16 @@ def get_account_overview(accountId):
     Note:
         Authentication neccessary
     """
-    return Base()._request(f"{BASE_URL}{constants['paths']['ACCOUNT_OVERVIEW_PATH']}".format(accountId), auth=True)
+    return Base()._request(f"{BASE_URL}{constants['paths']['ACCOUNT_OVERVIEW_PATH']}".format(account_id), auth=True)
 
 
-def get_transactions(accountId=None):
+def get_transactions(account_id=None):
     """
     Returns information about accounts watchlists
 
 
     Args:
-        accountId (int, optional): id of account
+        account_id (int): id of account
 
     Returns:
         dict:
@@ -32,17 +32,17 @@ def get_transactions(accountId=None):
         Authentication neccessary
     """
     url = f"{BASE_URL}{constants['paths']['TRANSACTIONS_PATH']}"
-    if accountId:
-        return Base()._request(url.format(accountId), auth=True)
+    if account_id:
+        return Base()._request(url.format(account_id), auth=True)
     return Base()._request(url.replace('{0:d}', ''), auth=True)
 
 
-def get_insight(timePeriod="today"):
+def get_insight(**kwargs):
     """
     Returns accounts
 
     Args:
-        timePeriod (str): time period
+        time_period (str): time period
 
     Returns:
         dict:
@@ -50,8 +50,9 @@ def get_insight(timePeriod="today"):
     Note:
         Authentication neccessary
     """
-    timePeriod = timePeriod.upper()
-    url = f"{BASE_URL}{constants['paths']['INSIGHT']}".format(timePeriod)
+    time_period = kwargs.pop('time_period', 'TODAY').upper()
+    assert not kwargs
+    url = f"{BASE_URL}{constants['paths']['INSIGHT']}".format(time_period)
     if Base()._check_timePeriod(timePeriod):
         return Base()._request(url, auth=True)
     else:
