@@ -5,13 +5,37 @@ logger = logging.getLogger(__name__)
 from .constants import constants, BASE_URL
 
 
-class Base:
-    def __init__(self):
-        """Base class which other classes/function uses
+class Config:
+    """Config class for setting and retrieving settings"""
+    _settings = {
+            "cookie_path": "/tmp/.cookies",
+            }
 
-        Attributes:
-            session: initiates request session
-        """
+    @classmethod
+    def get(cls, name):
+        return cls._settings[name]
+
+    @classmethod
+    def set(cls, name):
+        if isinstance(name, dict):
+            for key, val in name.items():
+                if key in cls._settings:
+                    cls._settings[key] = val
+                else:
+                    raise NameError("Tried setting name which do not exist")
+        else:
+            logging.debug(f"Expected dict, retrieved {type(name)}")
+            raise TypeError(f"Expected dict, retrieved {type(name)}")
+
+
+class Base(Config):
+    """Base class which other classes/function uses
+
+    Attributes:
+        session: initiates request session
+    """
+    def __init__(self):
+        super().__init__()
         self.session = requests.Session()
 
     @property
@@ -29,12 +53,18 @@ class Base:
         logger.debug("Try authenticate using cookies")
         import pickle
         from os import path
-        if path.isfile('.cookies'):
-            with open('.cookies', 'r+b') as f:
-                self.session.cookies.update(pickle.load(f))
-            if self._auth_ok:
-                return
-            logger.debug("Authentication using cookies unsuccessful")
+        cookies = self.get('cookie_path')
+        if path.isfile(cookies):
+            try:
+                logging.debug(f"Try loading cookies at: {cookies}")
+                with open(cookies, 'r+b') as f:
+                    self.session.cookies.update(pickle.load(f))
+            except Exception as error:
+                logging.debug(f"Error while loading cookies: {error}")
+            finally:
+                if self._auth_ok:
+                    return
+                logger.debug("Authentication using cookies unsuccessful")
         else:
             logger.debug("No cookies found")
 
@@ -49,7 +79,8 @@ class Base:
             [self.session.cookies.set(c['name'], c['value']) for c in driver.get_cookies()]
         if self._auth_ok:
             try:
-                with open('.cookies', 'w+b') as f:
+                logging.debug(f"Try saving cookies at: {cookies}")
+                with open(cookies, 'w+b') as f:
                     pickle.dump(self.session.cookies, f)
             except Exception as error:
                 logging.debug(f"Error while saving cookies: {error}")
