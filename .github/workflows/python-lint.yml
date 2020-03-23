@@ -40,4 +40,4 @@ jobs:
     - name: Security lint with bandit
       run: |
         pip install bandit
-        bandit -r . -ll -ii -s B301
+        bandit -r . -ll -ii -s B108,B301
