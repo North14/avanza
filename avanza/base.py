@@ -6,17 +6,36 @@ from .constants import constants, BASE_URL
 
 
 class Config:
-    """Config class for setting and retrieving settings"""
+    """Config class for setting and retrieving settings
+
+    Attributes:
+        settings:
+            cookie_path
+                path to file which should be used when loading/storing cookies
+    """
     _settings = {
             "cookie_path": "/tmp/.cookies",
             }
 
     @classmethod
     def get(cls, name):
+        """Retrieves the value of setting
+
+        Args:
+            name (str): The key which value should be returned
+        """
         return cls._settings[name]
 
     @classmethod
     def set(cls, name):
+        """Change settings using dict
+
+        Examples:
+            >>> avanza.Config.set({'cookie_path': '/path/to/file'})
+
+        Args:
+            name (dict): The new values to set
+        """
         if isinstance(name, dict):
             for key, val in name.items():
                 if key in cls._settings:
