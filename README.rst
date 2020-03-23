@@ -45,6 +45,13 @@ More examples can be found
 
 `Documentation <https://avanza.readthedocs.io/en/latest/>`__
 
+Security Notice
+===============
+
+This python wrapper voids following bandit codes:
+`B108 <https://bandit.readthedocs.io/en/latest/plugins/b108_hardcoded_tmp_directory.html>`__
+`B301 <https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b301-pickle>`__
+
 .. |docs| image:: https://img.shields.io/readthedocs/avanza?style=flat-square&logo=read-the-docs
    :target: https://avanza.readthedocs.io/
    :alt: Read the Docs
