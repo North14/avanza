@@ -24,7 +24,8 @@ class ChartData(Base):
             Authentication necessary
         """
         time_period = time_period.upper()
-        url = f"{BASE_URL}{constants['paths']['CHARTDATA_OVERVIEW']}".format(time_period)
+        path = f"{BASE_URL}{constants['paths']['CHARTDATA_OVERVIEW']}"
+        url = path.format(time_period)
         if self._check_time_period(time_period):
             r = self._request(url, auth=True)
             if pandas_imported:
@@ -98,7 +99,7 @@ class ChartData(Base):
             "timePeriod": time_period
             }
         h = {"Content-Type": "application/json"}
-        
+
         from datetime import datetime
         r = self._request(url, params=p, headers=h, method="POST")
         if pandas_imported:

@@ -14,7 +14,9 @@ def get_account_overview(account_id):
     Note:
         Authentication neccessary
     """
-    return Base()._request(f"{BASE_URL}{constants['paths']['ACCOUNT_OVERVIEW_PATH']}".format(account_id), auth=True)
+    path = f"{BASE_URL}{constants['paths']['ACCOUNT_OVERVIEW_PATH']}"
+    url = path.format(account_id)
+    return Base()._request(url, auth=True)
 
 
 def get_transactions(account_id=None):
@@ -68,7 +70,8 @@ def get_watchlists():
     Note:
         Authentication neccessary
     """
-    return Base()._request(f"{BASE_URL}{constants['paths']['WATCHLISTS_PATH']}", auth=True)
+    url = f"{BASE_URL}{constants['paths']['WATCHLISTS_PATH']}"
+    return Base()._request(url, auth=True)
 
 
 def get_positions():
@@ -80,7 +83,8 @@ def get_positions():
     Note:
         Authentication neccessary
     """
-    return Base()._request(f"{BASE_URL}{constants['paths']['POSITIONS_PATH']}", auth=True)
+    url = f"{BASE_URL}{constants['paths']['POSITIONS_PATH']}"
+    return Base()._request(url, auth=True)
 
 
 def get_deals_and_orders():
@@ -92,7 +96,8 @@ def get_deals_and_orders():
     Note:
         Authentication neccessary
     """
-    return Base()._request(f"{BASE_URL}{constants['paths']['DEALS_AND_ORDERS_PATH']}", auth=True)
+    url = f"{BASE_URL}{constants['paths']['DEALS_AND_ORDERS_PATH']}"
+    return Base()._request(url, auth=True)
 
 
 def get_feed():
@@ -104,7 +109,8 @@ def get_feed():
     Note:
         Authentication neccessary
     """
-    return Base()._request(f"{BASE_URL}{constants['paths']['FEED']}", auth=True)
+    url = f"{BASE_URL}{constants['paths']['FEED']}"
+    return Base()._request(url, auth=True)
 
 
 def get_accounts():
@@ -116,7 +122,8 @@ def get_accounts():
     Note:
         Authentication neccessary
     """
-    return Base()._request(f"{BASE_URL}{constants['paths']['ACCOUNTS']}", auth=True)
+    url = f"{BASE_URL}{constants['paths']['ACCOUNTS']}"
+    return Base()._request(url, auth=True)
 
 
 def get_inspiration_list():
@@ -128,7 +135,8 @@ def get_inspiration_list():
     Note:
         Authentication neccessary
     """
-    return Base()._request(f"{BASE_URL}{constants['paths']['INSPIRATION_LIST_PATH']}")
+    url = f"{BASE_URL}{constants['paths']['INSPIRATION_LIST_PATH']}"
+    return Base()._request(url)
 
 
 def get_account_summary():
@@ -139,4 +147,5 @@ def get_account_summary():
     Note:
         Authentication neccessary
     """
-    return Base()._request(f"{BASE_URL}{constants['paths']['CATEGORIZED_ACCOUNTS']}", auth=True)
+    url = f"{BASE_URL}{constants['paths']['CATEGORIZED_ACCOUNTS']}"
+    return Base()._request(url, auth=True)

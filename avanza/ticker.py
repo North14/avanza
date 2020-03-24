@@ -20,8 +20,10 @@ class Ticker(Base):
         super().__init__()
         instrument = kwargs.pop('instrument', 'stock').lower()
         auth = kwargs.pop('auth', False)
+        assert not kwargs
         if instrument in ['fund', 'certificate', 'stock']:
-            url = f"{BASE_URL}{constants['paths']['INSTRUMENT_PATH']}".format(instrument, orderbook_id)
+            path = f"{BASE_URL}{constants['paths']['INSTRUMENT_PATH']}"
+            url = path.format(instrument, orderbook_id)
             self.data = self._request(url, auth=auth)
         else:
             raise TypeError("Invalid option!")
