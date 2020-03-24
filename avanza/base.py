@@ -95,7 +95,8 @@ class Base(Config):
             wait = WebDriverWait(driver, 1200)
             driver.get(f"{BASE_URL}{constants['paths']['LOGIN']}")
             wait.until(expected_conditions.title_is("Hem"))
-            [self.session.cookies.set(c['name'], c['value']) for c in driver.get_cookies()]
+            for c in driver.get_cookies():
+                self.session.cookies.set(c['name'], c['value'])
         if self._auth_ok:
             try:
                 logging.debug(f"Try saving cookies at: {cookies}")
@@ -140,11 +141,14 @@ class Base(Config):
             raise Exception("error invalid method for _request")
 
         if 'statusCode' in r:
-            logger.debug(f"Error while retrieving json {r['time']}: {r['statusCode']} - {r['message']}")
+            logger.debug(f"Error while retrieving json {r['time']}: "
+                         f"{r['statusCode']} - {r['message']}")
             if r['errors']:
-                logger.debug(f"Error while retrieving json {r['time']}: {r['errors']}")
+                logger.debug(f"Error while retrieving json {r['time']}: "
+                             f"{r['errors']}")
             if r['additional']:
-                logger.debug(f"Error while retrieving json {r['time']}: {r['additional']}")
+                logger.debug(f"Error while retrieving json {r['time']}: "
+                             f"{r['additional']}")
             raise Exception("Error while retrieving json")
         return r
 

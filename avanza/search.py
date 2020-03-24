@@ -44,7 +44,8 @@ class Search(Base):
             Dict:
 
         Note:
-            Results are ordered by instrument, which means stock is the most likely result
+            Results are ordered by instrument,
+            which means stock is the most likely result
         """
         return self.data['resultGroups'][0]
 
