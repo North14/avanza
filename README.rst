@@ -49,6 +49,7 @@ Security Notice
 ===============
 
 This python wrapper voids following bandit codes:
+`B101 <https://bandit.readthedocs.io/en/latest/plugins/b101_assert_used.html>`__
 `B108 <https://bandit.readthedocs.io/en/latest/plugins/b108_hardcoded_tmp_directory.html>`__
 `B301 <https://bandit.readthedocs.io/en/latest/blacklists/blacklist_calls.html#b301-pickle>`__
 
