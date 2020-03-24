@@ -5,3 +5,5 @@ flake8
 bandit
 pytest
 sphinx_rtd_theme
+python-coveralls
+pytest-cov
