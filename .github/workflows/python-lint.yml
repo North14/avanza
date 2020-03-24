@@ -26,9 +26,5 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests
         pip install tox tox-gh-actions
-    - name: Tox
+    - name: With tox; Pytest, Flake8 and Bandit
       run: tox
-    - name: Lint
-      run: tox -e flake8
-    - name: bandit
-      run: tox -e bandit
