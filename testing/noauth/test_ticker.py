@@ -7,8 +7,6 @@ def test_ticker():
     assert isinstance(msft.buy_price, float)
     assert isinstance(msft.sell_price, float)
     assert isinstance(msft.last_price, float)
-    assert isinstance(msft.highest_price, float)
-    assert isinstance(msft.lowest_price, float)
     assert isinstance(msft.symbol, str)
     assert isinstance(msft.currency, str)
     assert isinstance(msft.isin, str)
