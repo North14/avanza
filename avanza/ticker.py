@@ -135,7 +135,7 @@ class Ticker(Base):
         """Grabs change price of ticker
 
         Returns:
-            int:
+            float:
         """
         return self.data['change']
 
@@ -144,7 +144,7 @@ class Ticker(Base):
         """Grabs change price of ticker in percent
 
         Returns:
-            int:
+            float:
         """
         return self.data['changePercent']
 
@@ -173,7 +173,7 @@ class Ticker(Base):
         Returns:
             int:
         """
-        return self.data['id']
+        return int(self.data['id'])
 
     @property
     def quote_updated(self):

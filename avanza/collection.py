@@ -131,9 +131,6 @@ def get_inspiration_list():
 
     Returns:
         dict:
-
-    Note:
-        Authentication neccessary
     """
     url = f"{BASE_URL}{constants['paths']['INSPIRATION_LIST_PATH']}"
     return Base()._request(url)
