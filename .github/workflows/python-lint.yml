@@ -27,5 +27,8 @@ jobs:
         pip install requests
         pip install tox tox-gh-actions
     - name: Tox
-      run: |
-        tox -e ALL
+      run: tox
+    - name: Lint
+      run: tox -e flake8
+    - name: bandit
+      run: tox -e bandit
