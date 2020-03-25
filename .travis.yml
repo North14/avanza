@@ -14,11 +14,11 @@ jobs:
       env: TOXENV=packaging
     
     - python: 3.6
-      env: TOXENV=coverage-py36,coveralls
+      env: TOXENV=coverage-py36,codecov
     - python: 3.7
-      env: TOXENV=coverage-py37,coveralls
+      env: TOXENV=coverage-py37,codecov
     - python: 3.8
-      env: TOXENV=coverage-py38,coveralls
+      env: TOXENV=coverage-py38,codecov
 
 install:
   - python -VV
