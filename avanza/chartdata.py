@@ -9,9 +9,11 @@ from .constants import constants, BASE_URL
 from .base import Base
 
 
-class ChartData(Base):
+class ChartData:
     """Grab json chartdata and output as pandas DataFrame"""
-    def get_overview_chartdata(self, time_period='one_month'):
+
+    @staticmethod
+    def get_overview_chartdata(time_period='one_month'):
         """Returns chartdata from overview page
 
         Args:
@@ -26,8 +28,8 @@ class ChartData(Base):
         time_period = time_period.upper()
         path = f"{BASE_URL}{constants['paths']['CHARTDATA_OVERVIEW']}"
         url = path.format(time_period)
-        if self._check_time_period(time_period):
-            r = self._request(url, auth=True)
+        if Base()._check_time_period(time_period):
+            r = Base()._request(url, auth=True)
             if pandas_imported:
                 if 'absoluteSeries' in r:
                     data_series = []
@@ -41,7 +43,8 @@ class ChartData(Base):
         else:
             raise Exception("Invalid time_period!")
 
-    def get_distribution_chartdata(self):
+    @staticmethod
+    def get_distribution_chartdata():
         """Returns values from account distribution pie chart
 
         Returns:
@@ -52,7 +55,7 @@ class ChartData(Base):
             Will "unpack" original drilldown
         """
         url = f"{BASE_URL}{constants['paths']['CHARTDATA_DISTRIBUTION']}"
-        r = self._request(url, auth=True)
+        r = Base()._request(url, auth=True)
         if pandas_imported:
             pie_dict_list = []
             for x in r:
@@ -65,7 +68,8 @@ class ChartData(Base):
             return pandas.read_json(json.dumps(pie_dict_list))
         return r
 
-    def get_ticker_chartdata(self, orderbook_id, **kwargs):
+    @staticmethod
+    def get_ticker_chartdata(orderbook_id, **kwargs):
         """Returns chartdata from overview page
 
         Args:
@@ -101,7 +105,7 @@ class ChartData(Base):
         h = {"Content-Type": "application/json"}
 
         from datetime import datetime
-        r = self._request(url, params=p, headers=h, method="POST")
+        r = Base()._request(url, params=p, headers=h, method="POST")
         if pandas_imported:
             if 'dataPoints' in r:
                 data_series = r['dataPoints']
