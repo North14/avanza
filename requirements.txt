@@ -4,6 +4,6 @@ pandas
 flake8
 bandit
 pytest
+sphinx
 sphinx_rtd_theme
 coveralls
-pytest-cov

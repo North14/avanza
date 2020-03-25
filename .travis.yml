@@ -1,0 +1,27 @@
+language: python
+dist: xenial
+
+jobs:
+  include:
+    - python: 3.8
+      env: TOXENV=flake8
+    - python: 3.8
+      env: TOXENV=bandit
+    - python: 3.8
+      env: TOXENV=docs
+    - python: 3.8
+      env: TOXENV=packaging
+    
+    - python: 3.6
+      env: TOXENV=coverage-py36,coveralls
+    - python: 3.7
+      env: TOXENV=coverage-py37,coveralls
+    - python: 3.8
+      env: TOXENV=coverage-py38,coveralls
+
+install:
+  - python -VV
+  - pip install tox requests
+
+script:
+  - tox
