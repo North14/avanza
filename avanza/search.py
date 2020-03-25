@@ -58,7 +58,6 @@ class Search(Base):
         """
         return self.data['totalNumberOfHits']
 
-    @property
     def by_instrument(self, instrument):
         """Grabs the results filtered by instrument type
 

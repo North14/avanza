@@ -47,8 +47,8 @@ class News(Base):
         string = ""
         for news in self.data['news']:
             string += f"\033[1mTitle:\033[0m {news['title']}\n"
-            time = datetime.strptime(news['publishDateTime'],
-                                     '%Y-%m-%dT%H:%M:%S%z')
+            utc = ''.join(news['publishDateTime'].rsplit(':', 1))
+            time = datetime.strptime(utc, '%Y-%m-%dT%H:%M:%S%z')
             string += f"\033[1mPublished:\033[0m {time:%d-%m-%Y %H:%M}\n"
             string += f"\033[1mUrl:\033[0m {BASE_URL}{news['url']}.html\n"
             string += f"\033[1mText:\033[0m {news['text']}\n"
